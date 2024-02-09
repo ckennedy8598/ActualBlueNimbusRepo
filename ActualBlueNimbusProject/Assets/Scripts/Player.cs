@@ -1,7 +1,7 @@
 /*
  * ****************************************************************************** *
  * Last Modified by Bobby Lapadula                                                *
- * Date and Time: 2/8/2024 02:11                                                  *
+ * Date and Time: 2/8/2024 22:45                                                  *
  * ****************************************************************************** *
 */
 using System.Collections;
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
         }
 
         // Wall Jumping Check
-        if (Input.GetKeyDown("space") && wallSliding == true)
+        if (Input.GetKeyDown("space") && wallSliding)
         {
             wallJumping = true;
             Invoke("SetWallJumpingToFalse", wallJumpTime);
@@ -116,21 +116,17 @@ public class Player : MonoBehaviour
         // Wall Front Check
         isTouchingFront = Physics2D.OverlapCircle(frontCheck.position, checkRadius, jumpableWalls);
 
-        if (isTouchingFront == true && !IsGround() && horizontalInput != 0)
+        if (isTouchingFront && !IsGround() && horizontalInput != 0)
         {
             wallSliding = true;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
         else
         {
             wallSliding = false;
         }
 
-        if (wallSliding)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
-        }
-
-        if (wallJumping == true)
+        if (wallJumping)
         {
             rb.velocity = new Vector2(xWallForce * -horizontalInput, yWallForce);
         }
@@ -139,8 +135,8 @@ public class Player : MonoBehaviour
         // Inconsistent due to upward velocity varying.
         if (downKey)
         {
-            downKey = false;
             rb.velocity = new Vector2(rb.velocity.x, downForce);
+            downKey = false;
             quickDrop = false;
             //Debug.Log("S Key Pressed.");
         }
