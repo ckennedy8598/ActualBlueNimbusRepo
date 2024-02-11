@@ -43,12 +43,17 @@ public class Player : MonoBehaviour
     [SerializeField] private float wallJumpTime;
     private bool wallJumping;
 
+    // Sound Effects
+    [SerializeField] private AudioSource jumpSoundEffect;
+    [SerializeField] private AudioSource backgroundMusic;
+
     // Start is called before the first frame update
     void Start()
     {
         // Initialize variables on start
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
+        backgroundMusic.Play();
     }
 
     // Update is called once per frame
@@ -69,6 +74,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown("space") && IsGround())
         {
             jumpKeyPressed = true;
+            jumpSoundEffect.Play();
         }
         
         // Quick Drop Input - Hard coded to S. Change in the future.
