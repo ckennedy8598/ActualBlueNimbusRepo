@@ -791,8 +791,8 @@ GameObject:
   - component: {fileID: 394899950}
   - component: {fileID: 394899947}
   - component: {fileID: 394899952}
-  - component: {fileID: 394899953}
   - component: {fileID: 394899954}
+  - component: {fileID: 394899953}
   - component: {fileID: 394899955}
   m_Layer: 0
   m_Name: Player
@@ -997,7 +997,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 211dcd66088ec544584f13cd9891f0cb, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1189,7 +1189,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9dd146c8aa8644749b33de875ce62818, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
