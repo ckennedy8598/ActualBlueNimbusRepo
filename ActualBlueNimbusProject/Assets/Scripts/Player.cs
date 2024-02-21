@@ -17,8 +17,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
-
     [Header ("Player Body Reference")]
     private Rigidbody2D rb;
     private BoxCollider2D coll;
@@ -68,7 +66,6 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource backgroundMusic;
     [SerializeField] private AudioSource jumpSoundEffect;
     [SerializeField] private AudioSource dashSoundEffect;
-
 
     private int debugCount = 0;
     // Start is called before the first frame update
@@ -221,21 +218,6 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("running", false);
         }
-
-        /*
-        if (horizontalInput > 0f)
-        {
-            anim.SetBool("running", true);
-        }
-        else if (horizontalInput < 0f)
-        {
-            anim.SetBool("running", true);
-        }
-        else
-        {
-            anim.SetBool("running", false);
-        }
-        */
     }
 
     // On Ground Method Check
