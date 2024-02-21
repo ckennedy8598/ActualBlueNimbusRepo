@@ -1,7 +1,11 @@
 /*
  * ****************************************************************************** *
  * Last Modified by Bobby Lapadula                                                *
- * Date and Time: 2/8/2024 22:45                                                  *
+ * Date and Time: 2/21/2024 12:55                                                 *
+ *                                                                                *
+ * This is the player movement script. It contains everything necessary for the   *
+ * player to move properly including direction movement, jumping and double       *
+ * jumping, dashing, and quick dropping.                                          *
  * ****************************************************************************** *
 */
 using System.Collections;
@@ -13,46 +17,65 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float downForce;
-    [SerializeField] private int moveSpeedModifier = 1;
-    [SerializeField] private LayerMask jumpableGround; 
-    [SerializeField] private LayerMask jumpableWalls; // Unused at the moment. Going to be used for wall jumping and sliding.
-
-    
+    [Header ("Player Body Reference")]
     private Rigidbody2D rb;
     private BoxCollider2D coll;
 
-    private float horizontalInput;
+    [Header("Animation Variables")]
+    private Animator anim;
+    private SpriteRenderer sprite;
+
+    [Header("Jumping Variables")]
+    [SerializeField] private float downForce;
+    [SerializeField] private int moveSpeedModifier = 1;
+    [SerializeField] private LayerMask jumpableGround;
+    [SerializeField] private LayerMask jumpableWalls;
+
+    [Header ("Movement and Jumping")]
+    private float horizontalInput = 0f;
+    private bool quickDrop = true;
+    private bool doubleJumpCheck = true;
+    private bool doubleJump;
     private bool jumpKeyPressed;
     private bool downKey;
-    private bool quickDrop = true;
 
-    // Wall Sliding
+    [Header ("Wall Sliding")]
     [SerializeField] private Transform frontCheck;
     [SerializeField] private float wallSlidingSpeed;
     private bool facingRight = true;
     private bool isTouchingFront;
     private bool wallSliding;
     
-    // Circle radius for front check
+    [Header ("Circle radius for front check")]
     private float checkRadius = .04f;
 
-    // Wall Jumping
+    [Header ("Wall Jumping")]
     [SerializeField] private float xWallForce;
     [SerializeField] private float yWallForce;
     [SerializeField] private float wallJumpTime;
     private bool wallJumping;
 
-    // Sound Effects
-    [SerializeField] private AudioSource jumpSoundEffect;
-    [SerializeField] private AudioSource backgroundMusic;
+    [Header ("Dashing")]
+    private float dashSpeed = 42f;
+    private float dashTime = .2f;
+    private float dashCooldown = 1f;
+    private bool canDash = true;
+    private bool isDashing;
 
+    [Header ("Sound Effects")]
+    [SerializeField] private AudioSource backgroundMusic;
+    [SerializeField] private AudioSource jumpSoundEffect;
+    [SerializeField] private AudioSource dashSoundEffect;
+
+    private int debugCount = 0;
     // Start is called before the first frame update
     void Start()
     {
         // Initialize variables on start
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
+        anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
         backgroundMusic.Play();
     }
 
@@ -61,13 +84,10 @@ public class Player : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
 
-        // Flipping Sprite
-        if (facingRight == false && horizontalInput > 0)
+        // return out of Update method if dashing
+        if (isDashing)
         {
-            Flip();
-        }else if(facingRight == true && horizontalInput < 0)
-        {
-            Flip();
+            return;
         }
 
         // Jumping
@@ -76,28 +96,42 @@ public class Player : MonoBehaviour
             jumpKeyPressed = true;
             jumpSoundEffect.Play();
         }
+        else if (Input.GetKeyDown("space") && !IsGround() && doubleJumpCheck)
+        {
+            Debug.Log("In the Air.");
+            doubleJumpCheck = false;
+            doubleJump = true;
+            jumpSoundEffect.Play();
+        }
         
         // Quick Drop Input - Hard coded to S. Change in the future.
-        if (Input.GetKeyDown(KeyCode.S) && !IsGround() && quickDrop && wallSliding == false)
+        if (Input.GetKeyDown(KeyCode.S) && !IsGround() && quickDrop && !wallSliding)
         {
             downKey = true;
             //Debug.Log("S key is true.");
         }
 
         // Quick Drop Ground Check
-        if (IsGround() || wallSliding == true)
+        if (IsGround() || wallSliding)
         {
             quickDrop = true;
-            //Debug.Log("Quick Drop: True.");
+            doubleJumpCheck = true;
         }
 
         // Wall Jumping Check
         if (Input.GetKeyDown("space") && wallSliding)
         {
-            wallJumping = true;
             Invoke("SetWallJumpingToFalse", wallJumpTime);
+            wallJumping = true;
+            jumpSoundEffect.Play();
         }
         
+        // Dashing Check
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            dashSoundEffect.Play();
+            StartCoroutine(Dash());
+        }
     }
 
     // Better to put physics logic here
@@ -106,11 +140,22 @@ public class Player : MonoBehaviour
         // Debug check for variable status
         //Debug.Log("Quick Drop: " + quickDrop + "- Down Key: " + downKey);
 
+        // return out of Update method if dashing
+        if (isDashing)
+        {
+            return;
+        }
+
         // Velocity Clamp
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, 16);
 
         // Jumping
-        if (jumpKeyPressed)
+        if (doubleJump)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 7);
+            doubleJump = false;
+        }
+        else if (jumpKeyPressed)
         {
             rb.velocity = new Vector2(rb.velocity.x, 7);
             jumpKeyPressed = false;
@@ -146,8 +191,34 @@ public class Player : MonoBehaviour
             quickDrop = false;
             //Debug.Log("S Key Pressed.");
         }
+
+        UpdateAnimationState();
     }
 
+    private void UpdateAnimationState()
+    {
+        // Flipping Sprite + Animation
+        if (horizontalInput > 0f)
+        {
+            anim.SetBool("running", true);
+            if (!facingRight)
+            {
+                Flip();
+            }
+        }
+        else if (horizontalInput < 0f)
+        {
+            anim.SetBool("running", true);
+            if (facingRight)
+            {
+                Flip();
+            }
+        }
+        else
+        {
+            anim.SetBool("running", false);
+        }
+    }
 
     // On Ground Method Check
     private bool IsGround()
@@ -167,5 +238,24 @@ public class Player : MonoBehaviour
     private void SetWallJumpingToFalse()
     {
         wallJumping = false;
+    }
+
+    // Dashing Coroutine
+    // Coroutines are very important for spreading an action over several frames, like dashing or animations.
+    // We'll be using these often, it seems, so definitely read up on them.
+    // Video for reference - https://youtu.be/2kFGmuPHiA0
+    // Unity documentation for coroutines - https://docs.unity3d.com/Manual/Coroutines.html
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+        yield return new WaitForSeconds(dashTime);
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 }
