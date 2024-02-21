@@ -201,15 +201,28 @@ public class Player : MonoBehaviour
     private void UpdateAnimationState()
     {
         // Flipping Sprite + Animation
-        if (!facingRight && horizontalInput > 0f)
+        if (horizontalInput > 0f)
         {
-            Flip();
+            anim.SetBool("running", true);
+            if (!facingRight)
+            {
+                Flip();
+            }
         }
-        else if (facingRight && horizontalInput < 0f)
+        else if (horizontalInput < 0f)
         {
-            Flip();
+            anim.SetBool("running", true);
+            if (facingRight)
+            {
+                Flip();
+            }
+        }
+        else
+        {
+            anim.SetBool("running", false);
         }
 
+        /*
         if (horizontalInput > 0f)
         {
             anim.SetBool("running", true);
@@ -222,6 +235,7 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("running", false);
         }
+        */
     }
 
     // On Ground Method Check
