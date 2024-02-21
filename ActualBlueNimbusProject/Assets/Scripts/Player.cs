@@ -1,7 +1,7 @@
 /*
  * ****************************************************************************** *
  * Last Modified by Bobby Lapadula                                                *
- * Date and Time: 2/16/2024 06:46                                                 *
+ * Date and Time: 2/21/2024 12:55                                                 *
  *                                                                                *
  * This is the player movement script. It contains everything necessary for the   *
  * player to move properly including direction movement, jumping and double       *
@@ -17,16 +17,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float downForce;
-    [SerializeField] private int moveSpeedModifier = 1;
-    [SerializeField] private LayerMask jumpableGround; 
-    [SerializeField] private LayerMask jumpableWalls;
 
+
+    [Header ("Player Body Reference")]
     private Rigidbody2D rb;
     private BoxCollider2D coll;
 
+    [Header("Animation Variables")]
+    private Animator anim;
+    private SpriteRenderer sprite;
+
+    [Header("Jumping Variables")]
+    [SerializeField] private float downForce;
+    [SerializeField] private int moveSpeedModifier = 1;
+    [SerializeField] private LayerMask jumpableGround;
+    [SerializeField] private LayerMask jumpableWalls;
+
     [Header ("Movement and Jumping")]
-    private float horizontalInput;
+    private float horizontalInput = 0f;
     private bool quickDrop = true;
     private bool doubleJumpCheck = true;
     private bool doubleJump;
@@ -69,6 +77,8 @@ public class Player : MonoBehaviour
         // Initialize variables on start
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
+        anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
         backgroundMusic.Play();
     }
 
@@ -81,15 +91,6 @@ public class Player : MonoBehaviour
         if (isDashing)
         {
             return;
-        }
-
-        // Flipping Sprite
-        if (!facingRight && horizontalInput > 0)
-        {
-            Flip();
-        }else if (facingRight && horizontalInput < 0)
-        {
-            Flip();
         }
 
         // Jumping
@@ -193,8 +194,35 @@ public class Player : MonoBehaviour
             quickDrop = false;
             //Debug.Log("S Key Pressed.");
         }
+
+        UpdateAnimationState();
     }
 
+    private void UpdateAnimationState()
+    {
+        // Flipping Sprite + Animation
+        if (!facingRight && horizontalInput > 0f)
+        {
+            Flip();
+        }
+        else if (facingRight && horizontalInput < 0f)
+        {
+            Flip();
+        }
+
+        if (horizontalInput > 0f)
+        {
+            anim.SetBool("running", true);
+        }
+        else if (horizontalInput < 0f)
+        {
+            anim.SetBool("running", true);
+        }
+        else
+        {
+            anim.SetBool("running", false);
+        }
+    }
 
     // On Ground Method Check
     private bool IsGround()
