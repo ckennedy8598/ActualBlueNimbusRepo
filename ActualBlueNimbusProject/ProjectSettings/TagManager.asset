@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
-  - Walls
-  - Pathfinding
-  - Enemy test
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -38,15 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 382347039
-    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Terrain
-    uniqueID: 1888382265
-    locked: 0
-  - name: Walls
-    uniqueID: 1754845363
     locked: 0
