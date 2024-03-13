@@ -14,7 +14,7 @@ TagManager:
   - Ground
   - Walls
   - Enemy
-  - 
+  - Hazards
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: Walls
     uniqueID: 1754845363
+    locked: 0
+  - name: Hazards
+    uniqueID: 3772047525
     locked: 0
