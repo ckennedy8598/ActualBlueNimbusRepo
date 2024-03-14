@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour
@@ -24,7 +25,17 @@ public class EnemyShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 scale = transform.localScale;
+
+        if(player.transform.position.x > transform.position.x)
+        {
+            scale.x = Mathf.Abs(scale.x) * -1;
+        }
+        else
+        {
+            scale.x = Mathf.Abs(scale.x);
+        }
+        transform.localScale = scale;
 
         float distance = Vector2.Distance(transform.position, player.transform.position);
 
