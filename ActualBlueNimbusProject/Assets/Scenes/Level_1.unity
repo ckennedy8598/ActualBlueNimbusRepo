@@ -386,7 +386,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1754845363
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -2772,7 +2772,7 @@ GameObject:
   - component: {fileID: 1324866685}
   - component: {fileID: 1324866687}
   - component: {fileID: 1324866686}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2833,7 +2833,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 382347039
-  m_SortingLayer: -1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5329,7 +5329,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1888382265
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -16925,6 +16925,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 347684906113700168, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
+      propertyPath: enemyLayers.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 3321205006623553984, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.491
@@ -16968,6 +16972,14 @@ PrefabInstance:
     - target: {fileID: 3367494392124559639, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5763387853464551935, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
+      propertyPath: jumpableWalls.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 5763387853464551935, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
+      propertyPath: jumpableGround.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
