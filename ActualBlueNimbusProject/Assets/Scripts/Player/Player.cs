@@ -1,7 +1,7 @@
 /*
  * ****************************************************************************** *
  * Last Modified by Bobby Lapadula                                                *
- * Date and Time: 2/21/2024 12:55                                                 *
+ * Date and Time: 3/15/2024 15:07                                                 *
  *                                                                                *
  * This is the player movement script. It contains everything necessary for the   *
  * player to move properly including direction movement, jumping and double       *
@@ -56,9 +56,9 @@ public class Player : MonoBehaviour
     private bool wallJumping;
 
     [Header ("Dashing")]
-    private float dashSpeed = 42f;
-    private float dashTime = .2f;
-    private float dashCooldown = 1f;
+    [SerializeField] private float dashSpeed = 42f;
+    [SerializeField] private float dashTime = .2f;
+    [SerializeField] private float dashCooldown = 1f;
     private bool canDash = true;
     private bool isDashing;
 
@@ -83,6 +83,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
+
+        if (gameObject == null)
+        {
+            return;
+        }
 
         // return out of Update method if dashing
         if (isDashing)
@@ -195,6 +200,7 @@ public class Player : MonoBehaviour
         UpdateAnimationState();
     }
 
+    // Flips and changes sprite animations
     private void UpdateAnimationState()
     {
         // Flipping Sprite + Animation
