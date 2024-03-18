@@ -22,18 +22,19 @@ public class EnemyPatrol : MonoBehaviour
     
     void Start()
     {
-        flip();
+        /*flip();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         currentPoint = PointB.transform;
-        anim.SetBool("IsWalking", true);
+        anim.SetBool("IsWalking", true);*/
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 point = currentPoint.position - transform.position;
+        //Vector2 point = currentPoint.position - transform.position;
+        /*
         if (currentPoint == PointB.transform)
         {
             rb.velocity = new Vector2(speed, 0);
@@ -53,6 +54,7 @@ public class EnemyPatrol : MonoBehaviour
             flip();
             currentPoint = PointB.transform;
         }
+        */
     }
 
     private void flip()
@@ -65,8 +67,8 @@ public class EnemyPatrol : MonoBehaviour
     //This draws a line between both patrol points
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(PointA.transform.position, 0.5F);
+        /*Gizmos.DrawWireSphere(PointA.transform.position, 0.5F);
         Gizmos.DrawWireSphere(PointB.transform.position, 0.5f);
-        Gizmos.DrawLine(PointA.transform.position, PointB.transform.position);
+        Gizmos.DrawLine(PointA.transform.position, PointB.transform.position);*/
     }
 }

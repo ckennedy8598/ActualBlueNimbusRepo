@@ -262,7 +262,7 @@ MonoBehaviour:
   moveSpeedModifier: 7
   jumpableGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 2112
   jumpableWalls:
     serializedVersion: 2
     m_Bits: 128
@@ -289,12 +289,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb3233ce459f9346a704dff5d9c8bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loseText: {fileID: 0}
+  retry: {fileID: 0}
+  mainMenu: {fileID: 0}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
   attackPoint: {fileID: 3157754702963996653}
   playerHealth: 5
   canBeHit: 1
+  slider: {fileID: 0}
 --- !u!114 &2244659336451164140
 MonoBehaviour:
   m_ObjectHideFlags: 0

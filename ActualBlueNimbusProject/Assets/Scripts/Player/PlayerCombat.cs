@@ -22,12 +22,9 @@ public class PlayerCombat : MonoBehaviour
     private Collider2D coll;
 
     [Header("User Interface Variables")]
-    [SerializeField]
-    public TMP_Text loseText;
-    [SerializeField]
-    public Button retry;
-    [SerializeField]
-    public Button mainMenu;
+    [SerializeField] public TMP_Text loseText;
+    [SerializeField] public Button retry;
+    [SerializeField] public Button mainMenu;
 
     [Header("Damage Variables")]
     public LayerMask enemyLayers;
@@ -45,12 +42,16 @@ public class PlayerCombat : MonoBehaviour
     {
         coll = GetComponent<Collider2D>();
         playerHealth = maxHealth; 
-        slider.maxValue = maxHealth; 
-        slider.value = playerHealth;
 
         loseText.enabled = false;
         retry.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(false);
+        
+        // Moved as when unassigned they were throwing an error
+        // and returning out of Start() before other code was
+        // being set.
+        slider.maxValue = maxHealth;
+        slider.value = playerHealth;
     }
 
     void Update()
@@ -88,12 +89,12 @@ public class PlayerCombat : MonoBehaviour
     public void TakeDamage(int damage)
     {
         playerHealth -= damage; 
-        slider.value = playerHealth;
+        //slider.value = playerHealth;
 
         if (playerHealth <= 0)
         {
             Die();
-            LoseScreen();
+            //LoseScreen();
         }
     }
 

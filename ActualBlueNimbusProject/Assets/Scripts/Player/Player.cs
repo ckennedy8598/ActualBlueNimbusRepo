@@ -1,7 +1,7 @@
 /*
  * ****************************************************************************** *
  * Last Modified by Bobby Lapadula                                                *
- * Date and Time: 3/15/2024 15:07                                                 *
+ * Date and Time: 3/18/2024 15:12                                                 *
  *                                                                                *
  * This is the player movement script. It contains everything necessary for the   *
  * player to move properly including direction movement, jumping and double       *
@@ -206,6 +206,7 @@ public class Player : MonoBehaviour
         // Flipping Sprite + Animation
         if (horizontalInput > 0f)
         {
+            //rb.isKinematic = false;
             anim.SetBool("running", true);
             if (!facingRight)
             {
@@ -214,6 +215,7 @@ public class Player : MonoBehaviour
         }
         else if (horizontalInput < 0f)
         {
+            //rb.isKinematic = true;
             anim.SetBool("running", true);
             if (facingRight)
             {
@@ -223,6 +225,7 @@ public class Player : MonoBehaviour
         else
         {
             anim.SetBool("running", false);
+            //rb.isKinematic = true;
         }
     }
 
@@ -231,6 +234,11 @@ public class Player : MonoBehaviour
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
+
+    /*public bool isSlope()
+    {
+        return Rayca;
+    }*/
 
     // Flip Sprite Left and Right Method
     private void Flip()
