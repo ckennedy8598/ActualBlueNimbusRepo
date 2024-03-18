@@ -89,12 +89,12 @@ public class PlayerCombat : MonoBehaviour
     public void TakeDamage(int damage)
     {
         playerHealth -= damage; 
-        //slider.value = playerHealth;
+        slider.value = playerHealth;
 
         if (playerHealth <= 0)
         {
             Die();
-            //LoseScreen();
+            LoseScreen();
         }
     }
 
