@@ -1,8 +1,8 @@
 /*
  * ****************************************************************************** *
  * Created by Bobby Lapadula                                                      *
- * Last Modified by Bobby Lapadula                                                *
- * Date and Time: 3/14/2024 XX:XX                                                 *
+ * Last Modified by Colin Murray                                                  *
+ * Date and Time: 3/18/2024 XX:XX                                                 *
  *                                                                                *
  * This is the player combat script. It encapsulates all methods and variables    *
  * required for the player to engage in combat. This script also has functions to *
@@ -39,11 +39,14 @@ public class PlayerCombat : MonoBehaviour
     public int playerHealth = 0;
     public bool canBeHit = true;
     private int maxHealth = 5;
-
+    public Slider slider;
+    
     private void Start()
     {
         coll = GetComponent<Collider2D>();
-        playerHealth = maxHealth;
+        playerHealth = maxHealth; 
+        slider.maxValue = maxHealth; 
+        slider.value = playerHealth;
 
         loseText.enabled = false;
         retry.gameObject.SetActive(false);
@@ -84,7 +87,8 @@ public class PlayerCombat : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        playerHealth -= damage;
+        playerHealth -= damage; 
+        slider.value = playerHealth;
 
         if (playerHealth <= 0)
         {
