@@ -172,16 +172,6 @@ public class Player : MonoBehaviour
         // Wall Front Check
         isTouchingFront = Physics2D.OverlapCircle(frontCheck.position, checkRadius, jumpableWalls);
 
-        if (isTouchingFront && !IsGround() && horizontalInput != 0)
-        {
-            wallSliding = true;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
-        }
-        else
-        {
-            wallSliding = false;
-        }
-
         if (wallJumping)
         {
             rb.velocity = new Vector2(xWallForce * -horizontalInput, yWallForce);
@@ -197,6 +187,18 @@ public class Player : MonoBehaviour
             //Debug.Log("S Key Pressed.");
         }
 
+        if (isTouchingFront && !IsGround() && horizontalInput != 0)
+        {
+            wallSliding = true;
+            anim.SetBool("wall_sliding", true);
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+        else
+        {
+            wallSliding = false;
+            anim.SetBool("wall_sliding", false);
+        }
+
         UpdateAnimationState();
     }
 
@@ -204,7 +206,7 @@ public class Player : MonoBehaviour
     private void UpdateAnimationState()
     {
         // Flipping Sprite + Animation
-        if (horizontalInput > 0f)
+        if (horizontalInput > 0f && !wallSliding)
         {
             //rb.isKinematic = false;
             anim.SetBool("running", true);
@@ -213,7 +215,7 @@ public class Player : MonoBehaviour
                 Flip();
             }
         }
-        else if (horizontalInput < 0f)
+        else if (horizontalInput < 0f && !wallSliding)
         {
             //rb.isKinematic = true;
             anim.SetBool("running", true);

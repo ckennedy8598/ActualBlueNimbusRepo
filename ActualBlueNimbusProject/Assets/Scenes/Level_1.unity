@@ -16850,6 +16850,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5096056667372958009, guid: d20394a0544c95a4dba8d76caa638db4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f6bdc1b74ce50c545ae63ed0cfe11886, type: 2}
     - target: {fileID: 7861198185479033643, guid: d20394a0544c95a4dba8d76caa638db4, type: 3}
       propertyPath: m_Name
       value: Archer Enemy
@@ -16955,6 +16959,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 9011031613097156465, guid: 10d0b773fb0fc064393cb7d6a0cf948d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17025,6 +17033,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1931584653337574019, guid: 9c532d388ac8fbd4e9ae412af0345881, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931584653337574019, guid: 9c532d388ac8fbd4e9ae412af0345881, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5616622121693826794, guid: 9c532d388ac8fbd4e9ae412af0345881, type: 3}
       propertyPath: m_Name
       value: User Interface
