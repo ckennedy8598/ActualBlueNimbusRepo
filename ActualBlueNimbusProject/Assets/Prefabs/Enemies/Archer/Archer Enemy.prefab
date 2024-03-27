@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4678273472887113619}
   - component: {fileID: 3245585428376386135}
   - component: {fileID: 8940664278330809943}
+  - component: {fileID: 739574833134885716}
+  - component: {fileID: 5096056667372958009}
   m_Layer: 8
   m_Name: Archer Enemy
   m_TagString: Untagged
@@ -193,6 +195,39 @@ MonoBehaviour:
   playerHealth: {fileID: 347684906113700168, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
   maxHealth: 100
   currentHealth: 0
+--- !u!114 &739574833134885716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861198185479033643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbd29b60862d80488c1ccc861d951c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &5096056667372958009
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861198185479033643}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 09cacbb5eb0540b4db3c01f846f53231, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8557247215532478229
 GameObject:
   m_ObjectHideFlags: 0

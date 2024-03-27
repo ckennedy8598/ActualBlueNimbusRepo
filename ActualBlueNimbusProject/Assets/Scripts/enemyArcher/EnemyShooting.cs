@@ -27,6 +27,11 @@ public class EnemyShooting : MonoBehaviour
     {
         Vector3 scale = transform.localScale;
 
+        if (gameObject.GetComponent<Enemy>().currentHealth <= 0)
+        {
+            return;
+        }
+
         if(player.transform.position.x > transform.position.x)
         {
             scale.x = Mathf.Abs(scale.x) * -1;
