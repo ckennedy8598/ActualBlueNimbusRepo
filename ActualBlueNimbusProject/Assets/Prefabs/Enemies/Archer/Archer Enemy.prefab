@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced253fbdefc3c449a6c8efb3eb43b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 5096056667372958009}
   damage: 2
   playerHealth: {fileID: 347684906113700168, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
   maxHealth: 100
@@ -217,7 +218,7 @@ Animator:
   m_GameObject: {fileID: 7861198185479033643}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 09cacbb5eb0540b4db3c01f846f53231, type: 2}
+  m_Controller: {fileID: 9100000, guid: f6bdc1b74ce50c545ae63ed0cfe11886, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

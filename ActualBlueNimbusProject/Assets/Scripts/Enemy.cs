@@ -16,9 +16,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Animator Reference")]
+    public Animator anim;
+
     [Header("Enemy Contact Damage")]
     [SerializeField] public int damage = 2;
 
+    [Header("Player Health Variables")]
     public PlayerCombat playerHealth;
     public int maxHealth = 100;
     public int currentHealth;
@@ -56,6 +60,12 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        anim.SetTrigger("isDead");
+
+        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        GetComponent<Collider2D>().enabled = false;
+        this.enabled = false;
+        //yield return new WaitForSeconds(2.5f);
+        //Destroy(gameObject);
     }
 }
