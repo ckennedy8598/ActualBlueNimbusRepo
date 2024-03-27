@@ -67,9 +67,14 @@ public class EnemyArrowScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.gameObject.CompareTag("Player"))
         {
             playerHealth.TakeDamage(damage);
+            Destroy(gameObject);
+        }
+        else
+        {
             Destroy(gameObject);
         }
     }
