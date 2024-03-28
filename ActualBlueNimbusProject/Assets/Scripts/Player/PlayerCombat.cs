@@ -69,7 +69,7 @@ public class PlayerCombat : MonoBehaviour
             return;
         }
 
-        if (Time.time > nextAttackTime)
+        if (Time.time >= nextAttackTime)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -96,7 +96,15 @@ public class PlayerCombat : MonoBehaviour
 
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy>().EnemyTakeDamage(attackDamage);
+            if (enemy.GetComponent<Enemy>() != null)
+            {
+                enemy.GetComponent<Enemy>().EnemyTakeDamage(attackDamage);
+            }
+
+            if (enemy.GetComponent<enemScriptKnight>() != null)
+            {
+                enemy.GetComponent<enemScriptKnight>().KnightEnemyTakeDamage(attackDamage);
+            }
         }
     }
 
