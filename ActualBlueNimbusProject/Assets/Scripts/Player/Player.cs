@@ -17,6 +17,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player Combat Script Reference")]
+    public PlayerCombat PlayerHealth;
+
     [Header ("Player Body Reference")]
     private Rigidbody2D rb;
     private BoxCollider2D coll;
@@ -71,6 +74,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerHealth = FindObjectOfType<PlayerCombat>();
+
         // Initialize variables on start
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
@@ -208,7 +213,6 @@ public class Player : MonoBehaviour
         // Flipping Sprite + Animation
         if (horizontalInput > 0f && !wallSliding)
         {
-            //rb.isKinematic = false;
             anim.SetBool("running", true);
             if (!facingRight)
             {
@@ -217,7 +221,6 @@ public class Player : MonoBehaviour
         }
         else if (horizontalInput < 0f && !wallSliding)
         {
-            //rb.isKinematic = true;
             anim.SetBool("running", true);
             if (facingRight)
             {
@@ -227,7 +230,6 @@ public class Player : MonoBehaviour
         else
         {
             anim.SetBool("running", false);
-            //rb.isKinematic = true;
         }
     }
 
@@ -236,11 +238,6 @@ public class Player : MonoBehaviour
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
-
-    /*public bool isSlope()
-    {
-        return Rayca;
-    }*/
 
     // Flip Sprite Left and Right Method
     private void Flip()
@@ -263,12 +260,15 @@ public class Player : MonoBehaviour
     // Unity documentation for coroutines - https://docs.unity3d.com/Manual/Coroutines.html
     private IEnumerator Dash()
     {
+        PlayerHealth.CanBeHit();
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
         yield return new WaitForSeconds(dashTime);
+        PlayerHealth.CanBeHit();
+        //Debug.Log("State of CanBeHit: " PlayerHealth.CanBeHit());
         rb.gravityScale = originalGravity;
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class enemScriptKnight : MonoBehaviour
 {
+    [Header("Rigidbody2D Reference")]
+    private Rigidbody2D rb;
+
     [Header("Animator Reference")]
     public Animator anim;
 
@@ -18,6 +21,8 @@ public class enemScriptKnight : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+
+        rb = GetComponent<Rigidbody2D>();
 
         // Instantiate PlayerCombat script reference
         playerHealth = FindObjectOfType<PlayerCombat>();
@@ -34,6 +39,7 @@ public class enemScriptKnight : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+            StartCoroutine(DestroyBody());
         }
     }
 
@@ -51,9 +57,17 @@ public class enemScriptKnight : MonoBehaviour
         anim.SetTrigger("isDead");
 
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-        GetComponent<Collider2D>().enabled = false;
+        // Freeze X and Y position of object rigidbody
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+        rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        // Disables Enemy Script
         this.enabled = false;
-        //yield return new WaitForSeconds(2.5f);
-        //Destroy(gameObject);
+    }
+
+    private IEnumerator DestroyBody()
+    {
+        yield return new WaitForSeconds(2.5f);
+        Destroy(gameObject);
     }
 }
