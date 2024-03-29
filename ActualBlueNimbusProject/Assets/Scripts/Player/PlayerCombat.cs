@@ -89,7 +89,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log("State of CanBeHit(FixedUpdate): " + canBeHit);
+        //Debug.Log("State of CanBeHit(FixedUpdate): " + canBeHit);
     }
 
     // Gets array of enemies hit and returns each dealing player attack damage to them
@@ -121,7 +121,7 @@ public class PlayerCombat : MonoBehaviour
             playerHealth -= damage;
             slider.value = playerHealth;
             StartCoroutine(Invul());
-            Debug.Log("State of CanBeHit: " + canBeHit);
+            //Debug.Log("State of CanBeHit: " + canBeHit);
         }
 
         if (playerHealth <= 0)
