@@ -1,8 +1,8 @@
 /*
  * ****************************************************************************** *
  * Created by Bobby Lapadula                                                      *
- * Last Modified by Bobby Lapadula                                                *
- * Date and Time: 3/15/2024 14:16                                                 *
+ * Last Modified by Chris Bunnell                                                 *
+ * Date and Time: 3/29/2024 1:42 PM                                               *
  *                                                                                *
  * This is the end level script. It is primarily a test script for winning a      *
  * level. It displays "You Win" text upon colliding with an object then goes to   *
@@ -33,7 +33,8 @@ public class levelEnd : MonoBehaviour
             WinText.enabled = true;
             yield return new WaitForSeconds(5);
             WinText.enabled = false;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Application.Quit();
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
