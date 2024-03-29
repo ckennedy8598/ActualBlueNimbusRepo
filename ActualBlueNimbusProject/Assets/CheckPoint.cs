@@ -11,6 +11,8 @@ public class CheckPoint : MonoBehaviour
     {
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<Game_Master>();
     }
+   
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -19,6 +21,9 @@ public class CheckPoint : MonoBehaviour
             Debug.Log("Checkpoint");
         }
     }
+
+    
+
     // Update is called once per frame
     void Update()
     {

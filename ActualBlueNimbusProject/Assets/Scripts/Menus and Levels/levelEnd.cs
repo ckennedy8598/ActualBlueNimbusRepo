@@ -19,6 +19,7 @@ public class levelEnd : MonoBehaviour
 {
     [SerializeField]
     public TMP_Text WinText;
+    public Game_Master resetCheckPoint;
 
     private void Start()
     {
@@ -33,8 +34,10 @@ public class levelEnd : MonoBehaviour
             WinText.enabled = true;
             yield return new WaitForSeconds(5);
             WinText.enabled = false;
-            Application.Quit();
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            
+           SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            resetCheckPoint = GameObject.FindGameObjectWithTag("GM").GetComponent<Game_Master>();
+            resetCheckPoint.lastCheckpointPos = new Vector2(26, -3);
         }
     }
 }
