@@ -12,6 +12,7 @@
 */
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -86,6 +87,11 @@ public class PlayerCombat : MonoBehaviour
         */
     }
 
+    private void FixedUpdate()
+    {
+        Debug.Log("State of CanBeHit(FixedUpdate): " + canBeHit);
+    }
+
     // Gets array of enemies hit and returns each dealing player attack damage to them
     void Attack()
     {
@@ -110,8 +116,13 @@ public class PlayerCombat : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        playerHealth -= damage; 
-        slider.value = playerHealth;
+        if (canBeHit)
+        {
+            playerHealth -= damage;
+            slider.value = playerHealth;
+            StartCoroutine(Invul());
+            Debug.Log("State of CanBeHit: " + canBeHit);
+        }
 
         if (playerHealth <= 0)
         {
@@ -153,5 +164,17 @@ public class PlayerCombat : MonoBehaviour
         loseText.enabled = true;
         retry.gameObject.SetActive(true);
         mainMenu.gameObject.SetActive(true);
+    }
+
+    public IEnumerator Invul()
+    {
+        CanBeHit();
+        yield return new WaitForSeconds(2);
+        CanBeHit();
+    }
+
+    public void CanBeHit()
+    {
+        canBeHit = !canBeHit;
     }
 }
