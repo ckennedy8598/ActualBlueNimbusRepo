@@ -45,6 +45,10 @@ public class PlayerCombat : MonoBehaviour
     [Header("Attack Variables")]
     public float attackRate = 2f;
     float nextAttackTime = 0f;
+
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource attackSFX;
+    [SerializeField] private AudioSource deathSFX;
     
     private void Start()
     {
@@ -98,6 +102,9 @@ public class PlayerCombat : MonoBehaviour
         // Play Attack Animation
         animator.SetTrigger("Light_Attack");
 
+        // Play Attack Sound
+        attackSFX.Play();
+
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         foreach(Collider2D enemy in hitEnemies)
@@ -120,6 +127,8 @@ public class PlayerCombat : MonoBehaviour
         {
             playerHealth -= damage;
             slider.value = playerHealth;
+/*            deathSFX.Play();
+            Debug.Log("Played");*/
             StartCoroutine(Invul());
             //Debug.Log("State of CanBeHit: " + canBeHit);
         }
@@ -141,13 +150,6 @@ public class PlayerCombat : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-
-    /*
-    private IEnumerator invulnerablePeriod()
-    {
-        canBeHit = false;
-    }
-    */
 
     // If player object exists, destroy
     public void Die()

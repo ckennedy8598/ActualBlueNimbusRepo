@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown("space") && !IsGround() && doubleJumpCheck)
         {
-            Debug.Log("In the Air.");
+            //Debug.Log("In the Air.");
             doubleJumpCheck = false;
             doubleJump = true;
             jumpSoundEffect.Play();
