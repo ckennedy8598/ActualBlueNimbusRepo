@@ -20,10 +20,12 @@ public class levelEnd : MonoBehaviour
     [SerializeField]
     public TMP_Text WinText;
     public Game_Master resetCheckPoint;
+    public PlayerCombat playerHealth;
 
     private void Start()
     {
         WinText.enabled = false;
+        playerHealth = FindAnyObjectByType<PlayerCombat>();
     }
 
     // Displays the win text for 5 seconds before loading the next level
@@ -32,6 +34,7 @@ public class levelEnd : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             WinText.enabled = true;
+            //playerHealth.canBeHit;
             yield return new WaitForSeconds(5);
             WinText.enabled = false;
             
