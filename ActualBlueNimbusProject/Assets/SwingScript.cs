@@ -23,8 +23,8 @@ public class SwingScript : MonoBehaviour
     {
         Instantiate(Swing, SwingPos.position, Quaternion.identity);
     }
-    void OnTriggerEnter2D(Collider other)
+/*    void OnTriggerEnter2D(Collider other)
     {
         EnemySwing();
-    }
+    }*/
 }
