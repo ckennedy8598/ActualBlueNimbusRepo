@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource jumpSoundEffect;
     [SerializeField] private AudioSource dashSoundEffect;
 
-    private int debugCount = 0;
+    //private int debugCount = 0;
     // Start is called before the first frame update
     void Start()
     {
