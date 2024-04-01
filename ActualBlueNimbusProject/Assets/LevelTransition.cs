@@ -8,6 +8,7 @@ public class LevelTransition : MonoBehaviour
 
     public Transform player;
     public Game_Master resetCheckPoint;
+    public Vector2 SpawnPOS = new Vector2(0, 0);
     
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -16,7 +17,7 @@ public class LevelTransition : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             resetCheckPoint = GameObject.FindGameObjectWithTag("GM").GetComponent<Game_Master>();
-            resetCheckPoint.lastCheckpointPos = new Vector2(0, 0);
+            resetCheckPoint.lastCheckpointPos = SpawnPOS;
 
         }
     }
