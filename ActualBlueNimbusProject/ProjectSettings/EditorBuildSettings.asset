@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level1EndMinibossScene.unity
     guid: 2bd8ad017da4bfd43895e93783e9a926
   - enabled: 1
+    path: Assets/Scenes/Level2Start.unity
+    guid: 2688fe7b115c22640b9c8a4f1824b02f
+  - enabled: 1
     path: Assets/Scenes/MainMenu 1.unity
     guid: 68ac339a0881d6b4d9eb7834e0316c74
   m_configObjects: {}
