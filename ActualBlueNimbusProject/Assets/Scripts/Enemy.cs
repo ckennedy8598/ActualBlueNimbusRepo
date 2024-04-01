@@ -60,6 +60,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("Player Collision Damage");
             playerHealth.TakeDamage(damage);
         }
     }
