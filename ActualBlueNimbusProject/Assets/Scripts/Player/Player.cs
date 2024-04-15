@@ -17,6 +17,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player Combat Script Reference")]
+    public PlayerCombat PlayerHealth;
+
     [Header ("Player Body Reference")]
     private Rigidbody2D rb;
     private BoxCollider2D coll;
@@ -67,10 +70,12 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource jumpSoundEffect;
     [SerializeField] private AudioSource dashSoundEffect;
 
-    private int debugCount = 0;
+    //private int debugCount = 0;
     // Start is called before the first frame update
     void Start()
     {
+        PlayerHealth = FindObjectOfType<PlayerCombat>();
+
         // Initialize variables on start
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
@@ -103,7 +108,7 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown("space") && !IsGround() && doubleJumpCheck)
         {
-            Debug.Log("In the Air.");
+            //Debug.Log("In the Air.");
             doubleJumpCheck = false;
             doubleJump = true;
             jumpSoundEffect.Play();
@@ -172,16 +177,6 @@ public class Player : MonoBehaviour
         // Wall Front Check
         isTouchingFront = Physics2D.OverlapCircle(frontCheck.position, checkRadius, jumpableWalls);
 
-        if (isTouchingFront && !IsGround() && horizontalInput != 0)
-        {
-            wallSliding = true;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
-        }
-        else
-        {
-            wallSliding = false;
-        }
-
         if (wallJumping)
         {
             rb.velocity = new Vector2(xWallForce * -horizontalInput, yWallForce);
@@ -197,6 +192,18 @@ public class Player : MonoBehaviour
             //Debug.Log("S Key Pressed.");
         }
 
+        if (isTouchingFront && !IsGround() && horizontalInput != 0)
+        {
+            wallSliding = true;
+            anim.SetBool("wall_sliding", true);
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+        else
+        {
+            wallSliding = false;
+            anim.SetBool("wall_sliding", false);
+        }
+
         UpdateAnimationState();
     }
 
@@ -204,18 +211,16 @@ public class Player : MonoBehaviour
     private void UpdateAnimationState()
     {
         // Flipping Sprite + Animation
-        if (horizontalInput > 0f)
+        if (horizontalInput > 0f && !wallSliding)
         {
-            //rb.isKinematic = false;
             anim.SetBool("running", true);
             if (!facingRight)
             {
                 Flip();
             }
         }
-        else if (horizontalInput < 0f)
+        else if (horizontalInput < 0f && !wallSliding)
         {
-            //rb.isKinematic = true;
             anim.SetBool("running", true);
             if (facingRight)
             {
@@ -225,7 +230,6 @@ public class Player : MonoBehaviour
         else
         {
             anim.SetBool("running", false);
-            //rb.isKinematic = true;
         }
     }
 
@@ -234,11 +238,6 @@ public class Player : MonoBehaviour
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
-
-    /*public bool isSlope()
-    {
-        return Rayca;
-    }*/
 
     // Flip Sprite Left and Right Method
     private void Flip()
@@ -261,12 +260,15 @@ public class Player : MonoBehaviour
     // Unity documentation for coroutines - https://docs.unity3d.com/Manual/Coroutines.html
     private IEnumerator Dash()
     {
+        PlayerHealth.CanBeHit();
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
         yield return new WaitForSeconds(dashTime);
+        PlayerHealth.CanBeHit();
+        //Debug.Log("State of CanBeHit: " PlayerHealth.CanBeHit());
         rb.gravityScale = originalGravity;
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);

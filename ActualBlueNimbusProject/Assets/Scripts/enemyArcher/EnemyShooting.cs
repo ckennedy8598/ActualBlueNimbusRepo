@@ -9,6 +9,9 @@ public class EnemyShooting : MonoBehaviour
     /// This is the script for the Archer enemy AI. I'll clean this up and add headers when I return, but for now
     /// this should be good for the FFP. 
     /// </summary>
+    [Header("Animator Reference")]
+    public Animator animimator;
+
     public GameObject Arrow;
     public Transform ArrowPos;
     private GameObject player;
@@ -26,6 +29,11 @@ public class EnemyShooting : MonoBehaviour
     void Update()
     {
         Vector3 scale = transform.localScale;
+
+        if (gameObject.GetComponent<Enemy>().currentHealth <= 0)
+        {
+            return;
+        }
 
         if(player.transform.position.x > transform.position.x)
         {
@@ -46,13 +54,24 @@ public class EnemyShooting : MonoBehaviour
             if (timer > shootInterval)
             {
                 timer = 0;
+                //anim.SetTrigger("Attack");
+                StartCoroutine(shootAnim());
                 shoot();
             }
         }
         
     }
-    void shoot()
+    private void shoot()
     {
         Instantiate(Arrow, ArrowPos.position, Quaternion.identity);
     }
+
+    private IEnumerator shootAnim()
+    {
+        //anim.SetTrigger("Attack");
+        animimator.SetBool("isShooting", true);
+        yield return new WaitForSeconds(1.0f);
+    }
+
+
 }

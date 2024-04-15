@@ -16,6 +16,7 @@ using UnityEngine.SceneManagement;
 
 public class ResetOnHazard : MonoBehaviour
 {
+    [SerializeField] private AudioSource playerDeathSFX;
     public PlayerCombat playerHealth;
 
     void Start()
@@ -33,6 +34,7 @@ public class ResetOnHazard : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            playerDeathSFX.Play();
             playerHealth.Die();
             playerHealth.LoseScreen();
         }

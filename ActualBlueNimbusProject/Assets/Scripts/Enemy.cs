@@ -16,9 +16,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Animator Reference")]
+    public Animator anim;
+
+    [Header("Rigid Body Reference")]
+    private Rigidbody2D rb;
+
     [Header("Enemy Contact Damage")]
     [SerializeField] public int damage = 2;
 
+    [Header("Player Health Variables")]
     public PlayerCombat playerHealth;
     public int maxHealth = 100;
     public int currentHealth;
@@ -26,6 +33,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+
+        rb = GetComponent<Rigidbody2D>();
 
         // Instantiate PlayerCombat script reference
         playerHealth = FindObjectOfType<PlayerCombat>();
@@ -42,6 +51,7 @@ public class Enemy : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+            StartCoroutine(DestroyBody());
         }
     }
 
@@ -50,12 +60,27 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("Player Collision Damage");
             playerHealth.TakeDamage(damage);
         }
     }
 
     private void Die()
     {
+        anim.SetTrigger("isDead");
+
+        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        // Freeze X and Y position of object rigidbody
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+        rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        // Disables Enemy Script
+        this.enabled = false;
+    }
+
+    private IEnumerator DestroyBody()
+    {
+        yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
     }
 }

@@ -12,6 +12,7 @@
 */
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,9 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("Player Enemy Collider Reference")]
     private Collider2D coll;
+
+    [Header("Animation Handlers")]
+    public Animator animator;
 
     [Header("User Interface Variables")]
     [SerializeField] public TMP_Text loseText;
@@ -37,6 +41,14 @@ public class PlayerCombat : MonoBehaviour
     public bool canBeHit = true;
     private int maxHealth = 5;
     public Slider slider;
+
+    [Header("Attack Variables")]
+    public float attackRate = 2f;
+    float nextAttackTime = 0f;
+
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource attackSFX;
+    [SerializeField] private AudioSource deathSFX;
     
     private void Start()
     {
@@ -62,9 +74,13 @@ public class PlayerCombat : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Time.time >= nextAttackTime)
         {
-            Attack();
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
         }
 
         /* Work on making invulnerability able to pass through enemies
@@ -75,21 +91,47 @@ public class PlayerCombat : MonoBehaviour
         */
     }
 
+    private void FixedUpdate()
+    {
+        //Debug.Log("State of CanBeHit(FixedUpdate): " + canBeHit);
+    }
+
     // Gets array of enemies hit and returns each dealing player attack damage to them
     void Attack()
     {
+        // Play Attack Animation
+        animator.SetTrigger("Light_Attack");
+
+        // Play Attack Sound
+        attackSFX.Play();
+
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy>().EnemyTakeDamage(attackDamage);
+            if (enemy.GetComponent<Enemy>() != null)
+            {
+                enemy.GetComponent<Enemy>().EnemyTakeDamage(attackDamage);
+            }
+
+            if (enemy.GetComponent<enemScriptKnight>() != null)
+            {
+                enemy.GetComponent<enemScriptKnight>().KnightEnemyTakeDamage(attackDamage);
+            }
         }
     }
 
     public void TakeDamage(int damage)
     {
-        playerHealth -= damage; 
-        slider.value = playerHealth;
+        if (canBeHit)
+        {
+            playerHealth -= damage;
+            slider.value = playerHealth;
+/*            deathSFX.Play();
+            Debug.Log("Played");*/
+            StartCoroutine(Invul());
+            //Debug.Log("State of CanBeHit: " + canBeHit);
+        }
 
         if (playerHealth <= 0)
         {
@@ -109,13 +151,6 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-    /*
-    private IEnumerator invulnerablePeriod()
-    {
-        canBeHit = false;
-    }
-    */
-
     // If player object exists, destroy
     public void Die()
     {
@@ -131,5 +166,17 @@ public class PlayerCombat : MonoBehaviour
         loseText.enabled = true;
         retry.gameObject.SetActive(true);
         mainMenu.gameObject.SetActive(true);
+    }
+
+    public IEnumerator Invul()
+    {
+        CanBeHit();
+        yield return new WaitForSeconds(2);
+        CanBeHit();
+    }
+
+    public void CanBeHit()
+    {
+        canBeHit = !canBeHit;
     }
 }
