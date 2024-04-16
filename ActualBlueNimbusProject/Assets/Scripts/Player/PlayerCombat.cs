@@ -96,6 +96,8 @@ public class PlayerCombat : MonoBehaviour
         //Debug.Log("State of CanBeHit(FixedUpdate): " + canBeHit);
     }
 
+    // Blinking Sprite Upon Taking Damage for Invul Duration
+
     // Gets array of enemies hit and returns each dealing player attack damage to them
     void Attack()
     {

@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        backgroundMusic.Play();
+        //backgroundMusic.Play();
     }
 
     // Update is called once per frame
