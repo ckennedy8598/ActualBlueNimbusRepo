@@ -10,7 +10,7 @@ public class EnemyShooting : MonoBehaviour
     /// this should be good for the FFP. 
     /// </summary>
     [Header("Animator Reference")]
-    public Animator animimator;
+    public Animator anim;
 
     public GameObject Arrow;
     public Transform ArrowPos;
@@ -55,8 +55,9 @@ public class EnemyShooting : MonoBehaviour
             {
                 timer = 0;
                 //anim.SetTrigger("Attack");
-                StartCoroutine(shootAnim());
-                shoot();
+                StartCoroutine(ShootAnim());
+                //anim.SetTrigger("Attack");
+                //shoot();
             }
         }
         
@@ -66,12 +67,11 @@ public class EnemyShooting : MonoBehaviour
         Instantiate(Arrow, ArrowPos.position, Quaternion.identity);
     }
 
-    private IEnumerator shootAnim()
+    private IEnumerator ShootAnim()
     {
         //anim.SetTrigger("Attack");
-        animimator.SetBool("isShooting", true);
+        anim.SetTrigger("Attack");
         yield return new WaitForSeconds(1.0f);
+        shoot();
     }
-
-
 }
