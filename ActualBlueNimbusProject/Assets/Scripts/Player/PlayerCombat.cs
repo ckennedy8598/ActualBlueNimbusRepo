@@ -46,6 +46,14 @@ public class PlayerCombat : MonoBehaviour
     public float attackRate = 2f;
     float nextAttackTime = 0f;
 
+    [Header("Heavy Attack Variables")]
+    public float maxChargeTime = 2f;
+    private float minDamage = 25f;
+    private float maxDamage = 100f;
+    private float currentChargeTime = 0f;
+    private bool isCharging = false;
+
+
     [Header("Sound Effects")]
     [SerializeField] private AudioSource attackSFX;
     [SerializeField] private AudioSource deathSFX;
@@ -83,17 +91,27 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
-        /* Work on making invulnerability able to pass through enemies
-        if (Input.GetKeyDown(KeyCode.F))
+        // Heavy Attack Input + Start Charge Time
+        if (Input.GetMouseButton(1))
         {
-            coll.enabled = !coll.enabled;
-        }
-        */
-    }
+            isCharging = true;
+            currentChargeTime += Time.deltaTime;
 
-    private void FixedUpdate()
-    {
-        //Debug.Log("State of CanBeHit(FixedUpdate): " + canBeHit);
+            currentChargeTime = Mathf.Clamp(currentChargeTime, 0f, maxChargeTime);
+        }
+
+        // Heavy Attack Release + Calculate Damage Ratio
+        if (Input.GetMouseButtonUp(1))
+        {
+            if (isCharging)
+            {
+                float chargeRatio = currentChargeTime / maxChargeTime;
+                float damage = Mathf.Lerp(minDamage, maxDamage, chargeRatio);
+                heavyAttack(damage);
+            }
+            currentChargeTime = 0f;
+            isCharging = false;
+        }
     }
 
     // Blinking Sprite Upon Taking Damage for Invul Duration
@@ -119,6 +137,24 @@ public class PlayerCombat : MonoBehaviour
             if (enemy.GetComponent<enemScriptKnight>() != null)
             {
                 enemy.GetComponent<enemScriptKnight>().KnightEnemyTakeDamage(attackDamage);
+            }
+        }
+    }
+
+    void heavyAttack(float damage)
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            if (enemy.GetComponent<Enemy>() != null)
+            {
+                enemy.GetComponent<Enemy>().EnemyTakeDamage(damage);
+            }
+
+            if (enemy.GetComponent<enemScriptKnight>() != null)
+            {
+                enemy.GetComponent<enemScriptKnight>().KnightEnemyTakeDamage(damage);
             }
         }
     }

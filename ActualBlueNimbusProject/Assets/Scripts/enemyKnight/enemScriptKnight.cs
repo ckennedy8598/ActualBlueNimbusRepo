@@ -16,7 +16,7 @@ public class enemScriptKnight : MonoBehaviour
     [Header("Player Health Variables")]
     public PlayerCombat playerHealth;
     public int maxHealth = 100;
-    public int currentHealth;
+    public float currentHealth;
 
     public int soulValue;
 
@@ -34,7 +34,7 @@ public class enemScriptKnight : MonoBehaviour
         }
     }
 
-    public void KnightEnemyTakeDamage(int damage)
+    public void KnightEnemyTakeDamage(float damage)
     {
         currentHealth -= damage;
 
