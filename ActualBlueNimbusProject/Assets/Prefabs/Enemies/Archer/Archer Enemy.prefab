@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86454c86604c5446aab21c275c8c41e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 5096056667372958009}
   Arrow: {fileID: 1967405268680983932, guid: 43ebc089f515cc848af9cbdc9cc8036e, type: 3}
   ArrowPos: {fileID: 7018633894666575982}
   shootInterval: 3
@@ -196,6 +197,7 @@ MonoBehaviour:
   playerHealth: {fileID: 347684906113700168, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
   maxHealth: 100
   currentHealth: 0
+  soulValue: 2
 --- !u!114 &739574833134885716
 MonoBehaviour:
   m_ObjectHideFlags: 0

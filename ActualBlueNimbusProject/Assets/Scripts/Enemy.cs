@@ -28,8 +28,9 @@ public class Enemy : MonoBehaviour
     [Header("Player Health Variables")]
     public PlayerCombat playerHealth;
     public int maxHealth = 100;
-    public int currentHealth;
+    public float currentHealth;
 
+    public int soulValue;
     void Start()
     {
         currentHealth = maxHealth;
@@ -44,7 +45,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void EnemyTakeDamage(int damage)
+    public void EnemyTakeDamage(float damage)
     {
         currentHealth -= damage;
 
@@ -82,5 +83,6 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
+        Collectibles_Soul_Counter.instance.IncreaseSouls(soulValue);
     }
 }

@@ -16,7 +16,9 @@ public class enemScriptKnight : MonoBehaviour
     [Header("Player Health Variables")]
     public PlayerCombat playerHealth;
     public int maxHealth = 100;
-    public int currentHealth;
+    public float currentHealth;
+
+    public int soulValue;
 
     void Start()
     {
@@ -32,7 +34,7 @@ public class enemScriptKnight : MonoBehaviour
         }
     }
 
-    public void KnightEnemyTakeDamage(int damage)
+    public void KnightEnemyTakeDamage(float damage)
     {
         currentHealth -= damage;
 
@@ -69,5 +71,6 @@ public class enemScriptKnight : MonoBehaviour
     {
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
+        Collectibles_Soul_Counter.instance.IncreaseSouls(soulValue);
     }
 }

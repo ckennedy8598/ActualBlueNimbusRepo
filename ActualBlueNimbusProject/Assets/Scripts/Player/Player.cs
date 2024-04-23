@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
 {
     [Header("Player Combat Script Reference")]
     public PlayerCombat PlayerHealth;
+    public PlayerCombat isCharging;
 
     [Header ("Player Body Reference")]
     private Rigidbody2D rb;
@@ -45,7 +46,7 @@ public class Player : MonoBehaviour
     [Header ("Wall Sliding")]
     [SerializeField] private Transform frontCheck;
     [SerializeField] private float wallSlidingSpeed;
-    private bool facingRight = true;
+    public bool facingRight = true;
     private bool isTouchingFront;
     private bool wallSliding;
     
@@ -76,17 +77,24 @@ public class Player : MonoBehaviour
     {
         PlayerHealth = FindObjectOfType<PlayerCombat>();
 
+
         // Initialize variables on start
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        backgroundMusic.Play();
+        //backgroundMusic.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (PlayerHealth.GetIsCharging())
+        {
+            horizontalInput = 0;
+            return;
+        }
+
         horizontalInput = Input.GetAxis("Horizontal");
 
         if (gameObject == null)
@@ -273,5 +281,10 @@ public class Player : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+
+    public bool GetFacingRight()
+    {
+        return facingRight;
     }
 }
