@@ -5,13 +5,16 @@ using UnityEngine;
 public class Collectibles_Souls : MonoBehaviour
 {
     public int x;
+    private Game_Master gm;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<Game_Master>();
+
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            Collectibles_Soul_Counter.instance.IncreaseSouls(x);
+            gm.IncreaseSouls(x);
         }
     }
 }

@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
     public int currentHealth;
 
     public int soulValue;
+    private Game_Master gm;
     void Start()
     {
         currentHealth = maxHealth;
@@ -83,6 +84,6 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
-        Collectibles_Soul_Counter.instance.IncreaseSouls(soulValue);
+        gm.IncreaseSouls(soulValue);
     }
 }

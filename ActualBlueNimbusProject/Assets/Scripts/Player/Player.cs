@@ -1,6 +1,6 @@
 /*
  * ****************************************************************************** *
- * Last Modified by Bobby Lapadula                                                *
+ * Last Modified by Christopher Bunnell                                           *
  * Date and Time: 3/18/2024 15:12                                                 *
  *                                                                                *
  * This is the player movement script. It contains everything necessary for the   *
@@ -69,6 +69,13 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource backgroundMusic;
     [SerializeField] private AudioSource jumpSoundEffect;
     [SerializeField] private AudioSource dashSoundEffect;
+
+    [Header ("Knock Back Logic")]
+    [SerializeField] private float KBForce;
+    [SerializeField] private float KBCounter;
+    [SerializeField] private float KBTotalTime;
+
+    [SerializeField] private bool KnockFromRight;
 
     //private int debugCount = 0;
     // Start is called before the first frame update
@@ -147,64 +154,77 @@ public class Player : MonoBehaviour
     // Better to put physics logic here
     private void FixedUpdate()
     {
+
+
+
         // Debug check for variable status
         //Debug.Log("Quick Drop: " + quickDrop + "- Down Key: " + downKey);
 
         // return out of Update method if dashing
-        if (isDashing)
-        {
-            return;
-        }
 
-        // Velocity Clamp
-        rb.velocity = Vector2.ClampMagnitude(rb.velocity, 16);
+        // This is Chris. I'm going to attempt to implement a knock back system
+        // This is to keep the player from being attacked in immediate succession
+        // If this doesn't work, I'll just comment it out
+       // if (KBCounter <= 0)
+       // {
 
-        // Jumping
-        if (doubleJump)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, 7);
-            doubleJump = false;
-        }
-        else if (jumpKeyPressed)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, 7);
-            jumpKeyPressed = false;
-        }
+       // }
 
-        // Horizontal Movement
-        rb.velocity = new Vector2(horizontalInput * moveSpeedModifier, rb.velocity.y);
+            if (isDashing)
+            {
+                return;
+            }
 
-        // Wall Front Check
-        isTouchingFront = Physics2D.OverlapCircle(frontCheck.position, checkRadius, jumpableWalls);
+            // Velocity Clamp
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, 16);
 
-        if (wallJumping)
-        {
-            rb.velocity = new Vector2(xWallForce * -horizontalInput, yWallForce);
-        }
+            // Jumping
+            if (doubleJump)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 7);
+                doubleJump = false;
+            }
+            else if (jumpKeyPressed)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 7);
+                jumpKeyPressed = false;
+            }
 
-        // Quick Drop Logic
-        // Inconsistent due to upward velocity varying.
-        if (downKey)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, downForce);
-            downKey = false;
-            quickDrop = false;
-            //Debug.Log("S Key Pressed.");
-        }
+            // Horizontal Movement
+            rb.velocity = new Vector2(horizontalInput * moveSpeedModifier, rb.velocity.y);
 
-        if (isTouchingFront && !IsGround() && horizontalInput != 0)
-        {
-            wallSliding = true;
-            anim.SetBool("wall_sliding", true);
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
-        }
-        else
-        {
-            wallSliding = false;
-            anim.SetBool("wall_sliding", false);
-        }
+            // Wall Front Check
+            isTouchingFront = Physics2D.OverlapCircle(frontCheck.position, checkRadius, jumpableWalls);
 
-        UpdateAnimationState();
+            if (wallJumping)
+            {
+                rb.velocity = new Vector2(xWallForce * -horizontalInput, yWallForce);
+            }
+
+            // Quick Drop Logic
+            // Inconsistent due to upward velocity varying.
+            if (downKey)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, downForce);
+                downKey = false;
+                quickDrop = false;
+                //Debug.Log("S Key Pressed.");
+            }
+
+            if (isTouchingFront && !IsGround() && horizontalInput != 0)
+            {
+                wallSliding = true;
+                anim.SetBool("wall_sliding", true);
+                rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+            }
+            else
+            {
+                wallSliding = false;
+                anim.SetBool("wall_sliding", false);
+            }
+
+            UpdateAnimationState();
+        
     }
 
     // Flips and changes sprite animations

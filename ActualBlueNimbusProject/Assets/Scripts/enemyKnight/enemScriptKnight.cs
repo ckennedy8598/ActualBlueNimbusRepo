@@ -19,6 +19,7 @@ public class enemScriptKnight : MonoBehaviour
     public int currentHealth;
 
     public int soulValue;
+    public Game_Master gm;
 
     void Start()
     {
@@ -71,6 +72,6 @@ public class enemScriptKnight : MonoBehaviour
     {
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
-        Collectibles_Soul_Counter.instance.IncreaseSouls(soulValue);
+        gm.IncreaseSouls(soulValue);
     }
 }
