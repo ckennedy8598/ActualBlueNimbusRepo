@@ -54,10 +54,7 @@ public class EnemyShooting : MonoBehaviour
             if (timer > shootInterval)
             {
                 timer = 0;
-                //anim.SetTrigger("Attack");
                 StartCoroutine(ShootAnim());
-                //anim.SetTrigger("Attack");
-                //shoot();
             }
         }
         
@@ -69,7 +66,6 @@ public class EnemyShooting : MonoBehaviour
 
     private IEnumerator ShootAnim()
     {
-        //anim.SetTrigger("Attack");
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(1.0f);
         shoot();

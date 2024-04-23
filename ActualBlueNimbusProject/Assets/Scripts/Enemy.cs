@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
     [Header("Player Health Variables")]
     public PlayerCombat playerHealth;
     public int maxHealth = 100;
-    public int currentHealth;
+    public float currentHealth;
 
     public int soulValue;
     private Game_Master gm;
@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void EnemyTakeDamage(int damage)
+    public void EnemyTakeDamage(float damage)
     {
         currentHealth -= damage;
 
