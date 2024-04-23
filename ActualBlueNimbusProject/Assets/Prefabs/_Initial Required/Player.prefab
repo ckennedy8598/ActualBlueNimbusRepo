@@ -99,6 +99,9 @@ GameObject:
   - component: {fileID: 1268588502197070142}
   - component: {fileID: 4951051093318669130}
   - component: {fileID: 4619599559091240131}
+  - component: {fileID: 2751267567338120388}
+  - component: {fileID: 8164489275492841597}
+  - component: {fileID: 6216282431613340959}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -123,6 +126,7 @@ Transform:
   - {fileID: 5072079322389564759}
   - {fileID: 3157754702963996653}
   - {fileID: 5169142899256998248}
+  - {fileID: 8207762386270295857}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1527057280007071193
@@ -262,6 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerHealth: {fileID: 0}
+  isCharging: {fileID: 0}
   downForce: -8
   moveSpeedModifier: 7
   jumpableGround:
@@ -272,6 +277,7 @@ MonoBehaviour:
     m_Bits: 128
   frontCheck: {fileID: 6938756045853146354}
   wallSlidingSpeed: 5
+  facingRight: 1
   xWallForce: 3
   yWallForce: 7
   wallJumpTime: 0.25
@@ -305,6 +311,10 @@ MonoBehaviour:
   canBeHit: 1
   slider: {fileID: 0}
   attackRate: 2
+  Fireball: {fileID: 8136045411414712166, guid: d8e3286633b05ef4498f827cac914aeb, type: 3}
+  FireballPos: {fileID: 8207762386270295857}
+  isCharging: 0
+  maxChargeTime: 1
   attackSFX: {fileID: 1696275099516298936}
   deathSFX: {fileID: 3473718060053484583}
 --- !u!114 &2244659336451164140
@@ -750,6 +760,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac41a99325102d84782e8411ceb6eab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2751267567338120388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3367494392124559639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac41a99325102d84782e8411ceb6eab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8164489275492841597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3367494392124559639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac41a99325102d84782e8411ceb6eab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6216282431613340959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3367494392124559639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac41a99325102d84782e8411ceb6eab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4586308161125958995
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,6 +968,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53657fd01978d04c80e3172821d1592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6255618999083539466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8207762386270295857}
+  m_Layer: 0
+  m_Name: FireballPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8207762386270295857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6255618999083539466}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3321205006623553984}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7417657680603383428
 GameObject:
   m_ObjectHideFlags: 0

@@ -5633,11 +5633,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5280813338089195657, guid: e16b38afea951d444ad1a55da56188cd, type: 3}
   m_PrefabInstance: {fileID: 887122568}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &522359467 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3367494392124559639, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
-  m_PrefabInstance: {fileID: 1659366273}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &524045553 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5280813338089195657, guid: e16b38afea951d444ad1a55da56188cd, type: 3}
@@ -7066,24 +7061,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3321205006623553984, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
   m_PrefabInstance: {fileID: 1659366273}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &709476469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522359467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac41a99325102d84782e8411ceb6eab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &709476478 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7445659527426344315, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
   m_PrefabInstance: {fileID: 1659366273}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522359467}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eeb3233ce459f9346a704dff5d9c8bc9, type: 3}
@@ -8335,6 +8318,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2691419306344975951, guid: c0a2bb4b622f51f448d8560015164c17, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 709476458}
     - target: {fileID: 6576417471435161031, guid: c0a2bb4b622f51f448d8560015164c17, type: 3}
       propertyPath: m_Name
       value: Knight_Light
@@ -12106,6 +12093,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2691419306344975951, guid: c0a2bb4b622f51f448d8560015164c17, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 709476458}
     - target: {fileID: 6576417471435161031, guid: c0a2bb4b622f51f448d8560015164c17, type: 3}
       propertyPath: m_Name
       value: Knight_Light (4)
@@ -35947,10 +35938,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3367494392124559639, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 709476469}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
 --- !u!1 &1667801646
 GameObject:
@@ -91110,6 +91098,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2691419306344975951, guid: c0a2bb4b622f51f448d8560015164c17, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 709476458}
     - target: {fileID: 6576417471435161031, guid: c0a2bb4b622f51f448d8560015164c17, type: 3}
       propertyPath: m_Name
       value: Knight_Light (3)
@@ -91251,6 +91243,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2691419306344975951, guid: c0a2bb4b622f51f448d8560015164c17, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 709476458}
     - target: {fileID: 6576417471435161031, guid: c0a2bb4b622f51f448d8560015164c17, type: 3}
       propertyPath: m_Name
       value: Knight_Light (1)

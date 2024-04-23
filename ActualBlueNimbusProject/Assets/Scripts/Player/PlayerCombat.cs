@@ -14,6 +14,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,13 +46,17 @@ public class PlayerCombat : MonoBehaviour
     [Header("Attack Variables")]
     public float attackRate = 2f;
     float nextAttackTime = 0f;
+    private bool heavyInput = false;
 
     [Header("Heavy Attack Variables")]
-    public float maxChargeTime = 2f;
+    public GameObject Fireball;
+    public Transform FireballPos;
+    public bool isCharging = false;
+    public float maxChargeTime = 1f;
     private float minDamage = 25f;
     private float maxDamage = 100f;
     private float currentChargeTime = 0f;
-    private bool isCharging = false;
+
 
 
     [Header("Sound Effects")]
@@ -84,33 +89,52 @@ public class PlayerCombat : MonoBehaviour
 
         if (Time.time >= nextAttackTime)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && isCharging == false)
             {
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
 
-        // Heavy Attack Input + Start Charge Time
-        if (Input.GetMouseButton(1))
+        // Heavy Attack Input
+        if (isCharging == false)
         {
-            isCharging = true;
-            currentChargeTime += Time.deltaTime;
+            if (Input.GetMouseButton(1))
+            {
+                currentChargeTime = 0f;
+                animator.SetTrigger("isCharging");
+                animator.ResetTrigger("doneAttacking");
+                //Debug.Log("isCharging: true");
+                isCharging = true;
+            }
+        }
 
+        // Start Charge Time
+        if (isCharging)
+        {
+            currentChargeTime += Time.deltaTime;
             currentChargeTime = Mathf.Clamp(currentChargeTime, 0f, maxChargeTime);
+            Debug.Log("Current Charge Time: " + currentChargeTime);
         }
 
         // Heavy Attack Release + Calculate Damage Ratio
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1) && heavyInput == false)
         {
             if (isCharging)
             {
+                Debug.Log("Heavy Attacking");
+                animator.SetTrigger("isHeavyAttacking");
+
+                heavyInput = true;
                 float chargeRatio = currentChargeTime / maxChargeTime;
                 float damage = Mathf.Lerp(minDamage, maxDamage, chargeRatio);
-                heavyAttack(damage);
+                if (currentChargeTime == maxChargeTime)
+                {
+                    Fireball_Attack();
+                    Debug.Log("Fireball!!!!!!!");
+                }
+                StartCoroutine(heavyAttackCD(damage));
             }
-            currentChargeTime = 0f;
-            isCharging = false;
         }
     }
 
@@ -178,6 +202,18 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    private IEnumerator heavyAttackCD(float damage)
+    {
+        //Debug.Log("Heavy Attack: Start");
+        yield return new WaitForSeconds(.85f);
+        heavyAttack(damage);
+        currentChargeTime = 0f;
+        isCharging = false;
+        heavyInput = false;
+        animator.SetTrigger("doneAttacking");
+        //Debug.Log("Heavy Attack: End");
+    }
+
     // Draw circle for attack position
     private void OnDrawGizmosSelected()
     {
@@ -187,6 +223,11 @@ public class PlayerCombat : MonoBehaviour
         }
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    public void Fireball_Attack()
+    {
+        Instantiate(Fireball, FireballPos.position, Fireball.transform.rotation);
     }
 
     // If player object exists, destroy
@@ -216,5 +257,10 @@ public class PlayerCombat : MonoBehaviour
     public void CanBeHit()
     {
         canBeHit = !canBeHit;
+    }
+
+    public bool GetIsCharging()
+    {
+        return isCharging;
     }
 }
