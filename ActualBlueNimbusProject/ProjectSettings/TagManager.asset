@@ -7,6 +7,7 @@ TagManager:
   - Checkpoint
   - GM
   - LevelSpawn
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - HazardLayer
   - Fire?
   - BackgroundBackground
-  - 
+  - Arrow
   - 
   - 
   - 

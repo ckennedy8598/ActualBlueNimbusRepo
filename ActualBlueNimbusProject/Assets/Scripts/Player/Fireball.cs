@@ -12,7 +12,8 @@ public class Fireball : MonoBehaviour
     [SerializeField] private float despawnTimer = 10;
     private bool isRight = true;
 
-    private int damage = 2;
+
+    private int damage = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,8 @@ public class Fireball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = FindObjectOfType<Player>();
-        var variableNassme = player.transform.localScale;
+        Vector3 fireballScaler = transform.localScale;
+
 
         if (playerScript.GetFacingRight())
         {
@@ -30,6 +32,8 @@ public class Fireball : MonoBehaviour
         else
         {
             transform.Translate(-transform.right);
+            fireballScaler.x *= -1;
+            transform.localScale = fireballScaler;
             isRight = false;
         }
     }
@@ -46,13 +50,6 @@ public class Fireball : MonoBehaviour
             transform.Translate((-transform.right * force * Time.deltaTime));
         }
 
-
-
-        if (player == null)
-        {
-            return;
-        }
-
         timer += Time.deltaTime;
 
         if (timer > despawnTimer)
@@ -67,20 +64,23 @@ public class Fireball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("Hit Enemy!");
             if (other.GetComponent<Enemy>() != null)
             {
                 other.GetComponent<Enemy>().EnemyTakeDamage(damage);
+                Debug.Log("Hit Archer!");
             }
 
             if (other.GetComponent<enemScriptKnight>() != null)
             {
                 other.GetComponent<enemScriptKnight>().KnightEnemyTakeDamage(damage);
+                Debug.Log("Hit Knight!");
             }
             Destroy(gameObject);
         }
         else
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }
