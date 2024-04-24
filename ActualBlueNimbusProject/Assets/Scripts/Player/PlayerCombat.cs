@@ -114,7 +114,7 @@ public class PlayerCombat : MonoBehaviour
         {
             currentChargeTime += Time.deltaTime;
             currentChargeTime = Mathf.Clamp(currentChargeTime, 0f, maxChargeTime);
-            Debug.Log("Current Charge Time: " + currentChargeTime);
+            //Debug.Log("Current Charge Time: " + currentChargeTime);
         }
 
         // Heavy Attack Release + Calculate Damage Ratio

@@ -154,6 +154,7 @@ public class Player : MonoBehaviour
         // Dashing Check
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
+            anim.SetTrigger("isDashing");
             dashSoundEffect.Play();
             StartCoroutine(Dash());
         }
