@@ -7,10 +7,6 @@ TagManager:
   - Checkpoint
   - GM
   - LevelSpawn
-<<<<<<< Updated upstream
-=======
-  - Enemy
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
@@ -27,7 +23,7 @@ TagManager:
   - HazardLayer
   - Fire?
   - BackgroundBackground
-  - Arrow
+  - 
   - 
   - 
   - 
