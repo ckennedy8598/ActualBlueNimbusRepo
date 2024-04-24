@@ -1,7 +1,7 @@
 /*
  * ****************************************************************************** *
  * Last Modified by Christopher Bunnell                                           *
- * Date and Time: 3/18/2024 15:12                                                 *
+ * Date and Time: 4/23/2024 21:00                                                 *
  *                                                                                *
  * This is the player movement script. It contains everything necessary for the   *
  * player to move properly including direction movement, jumping and double       *
