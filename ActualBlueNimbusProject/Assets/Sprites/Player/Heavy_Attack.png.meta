@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 805892b124a8a26489e6070eaac8ccf9
+guid: 219a9b61a7f833d4ea604fe5919d25df
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 400
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Light_Attack_Sprite_Sheet_0
+      name: Heavy_Attack_0
       rect:
         serializedVersion: 2
-        x: 730
-        y: 2360
-        width: 744
-        height: 1064
+        x: 225
+        y: 3623
+        width: 902
+        height: 1021
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,62 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e31658d986827a4b945c63fbb299956
-      internalID: -936863935
+      spriteID: af50b6700f39dec43b861b09ad5a8c89
+      internalID: -1366561905
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Light_Attack_Sprite_Sheet_1
+      name: Heavy_Attack_1
       rect:
         serializedVersion: 2
-        x: 2907
-        y: 2360
-        width: 441
-        height: 1171
-      alignment: 9
-      pivot: {x: 0.51009333, y: 0.4505608}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 903c32d99d11e5942bd5d24b00b100fc
-      internalID: 72101686
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Light_Attack_Sprite_Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 574
-        y: 320
-        width: 753
-        height: 1158
-      alignment: 9
-      pivot: {x: 0.6596738, y: 0.44616172}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 98718fb41bd67bd47b1b84bafac2462b
-      internalID: 779928392
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Light_Attack_Sprite_Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 2805
-        y: 316
-        width: 561
-        height: 1068
+        x: 1949
+        y: 3606
+        width: 925
+        height: 1032
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +145,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db65383b9ffaa5e4e801670d1148fc14
-      internalID: 1796163591
+      spriteID: 75b15bc549857704c82f3400152367d2
+      internalID: -1845619294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heavy_Attack_2
+      rect:
+        serializedVersion: 2
+        x: 3634
+        y: 3614
+        width: 943
+        height: 1034
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f61bca2e9e7af0243adec198843c60d2
+      internalID: -1982777947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heavy_Attack_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1578
+        width: 1472
+        height: 1752
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d4e4a2edd45be44cbf204bf3bc0ccd4
+      internalID: 1623594567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heavy_Attack_4
+      rect:
+        serializedVersion: 2
+        x: 1764
+        y: 1668
+        width: 1692
+        height: 1497
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87df147e4e8c62844aa8253641406fa3
+      internalID: 2014117980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heavy_Attack_5
+      rect:
+        serializedVersion: 2
+        x: 3466
+        y: 1883
+        width: 1685
+        height: 997
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b41feaa23da66fa45926ab4043485b9c
+      internalID: 2090205585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heavy_Attack_6
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 156
+        width: 1670
+        height: 1035
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06fa6ee80f63d5145a2292407c6b6e6c
+      internalID: -1689360714
       vertices: []
       indices: 
       edges: []
@@ -204,10 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Light_Attack_Sprite_Sheet_0: -936863935
-      Light_Attack_Sprite_Sheet_1: 72101686
-      Light_Attack_Sprite_Sheet_2: 779928392
-      Light_Attack_Sprite_Sheet_3: 1796163591
+      Heavy_Attack_0: -1366561905
+      Heavy_Attack_1: -1845619294
+      Heavy_Attack_2: -1982777947
+      Heavy_Attack_3: 1623594567
+      Heavy_Attack_4: 2014117980
+      Heavy_Attack_5: 2090205585
+      Heavy_Attack_6: -1689360714
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
