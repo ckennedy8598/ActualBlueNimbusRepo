@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5096056667372958009}
   m_Layer: 8
   m_Name: Archer Enemy
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

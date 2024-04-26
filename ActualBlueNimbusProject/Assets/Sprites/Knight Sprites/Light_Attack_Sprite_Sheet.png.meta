@@ -113,12 +113,12 @@ TextureImporter:
       name: Light_Attack_Sprite_Sheet_0
       rect:
         serializedVersion: 2
-        x: 730
-        y: 2360
-        width: 744
-        height: 1064
+        x: 0
+        y: 2048
+        width: 2048
+        height: 2048
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: Light_Attack_Sprite_Sheet_1
       rect:
         serializedVersion: 2
-        x: 2907
-        y: 2360
-        width: 441
-        height: 1171
-      alignment: 9
-      pivot: {x: 0.51009333, y: 0.4505608}
+        x: 2048
+        y: 2048
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: Light_Attack_Sprite_Sheet_2
       rect:
         serializedVersion: 2
-        x: 574
-        y: 320
-        width: 753
-        height: 1158
-      alignment: 9
-      pivot: {x: 0.6596738, y: 0.44616172}
+        x: 0
+        y: 0
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: Light_Attack_Sprite_Sheet_3
       rect:
         serializedVersion: 2
-        x: 2805
-        y: 316
-        width: 561
-        height: 1068
+        x: 2048
+        y: 0
+        width: 2048
+        height: 2048
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
