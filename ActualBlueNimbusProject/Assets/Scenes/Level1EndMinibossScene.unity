@@ -10847,26 +10847,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1131489365 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8752708693657891415, guid: 2b38d4ea703988d4db0b0f88c7b7655b, type: 3}
-  m_PrefabInstance: {fileID: 1521498157186193427}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1131489372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1131489365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b19280689c4cd444a653dbcda7af105, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PointA: {fileID: 1747870999}
-  PointB: {fileID: 1335014588}
-  speed: 5
 --- !u!1 &1145193209
 GameObject:
   m_ObjectHideFlags: 0
@@ -92423,6 +92403,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6406101839125199103, guid: 2b38d4ea703988d4db0b0f88c7b7655b, type: 3}
+      propertyPath: damage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406101839125199103, guid: 2b38d4ea703988d4db0b0f88c7b7655b, type: 3}
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 709476478}
@@ -92430,13 +92414,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemBoss_Lazarus
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9187669824600487063, guid: 2b38d4ea703988d4db0b0f88c7b7655b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 709476458}
+    m_RemovedComponents:
+    - {fileID: 944183483892156538, guid: 2b38d4ea703988d4db0b0f88c7b7655b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8752708693657891415, guid: 2b38d4ea703988d4db0b0f88c7b7655b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1131489372}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b38d4ea703988d4db0b0f88c7b7655b, type: 3}
 --- !u!1001 &1570167005790581458
 PrefabInstance:
