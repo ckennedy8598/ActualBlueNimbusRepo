@@ -7084,6 +7084,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: soul_small (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4944222059174537122, guid: e16b38afea951d444ad1a55da56188cd, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5280813338089195657, guid: e16b38afea951d444ad1a55da56188cd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
