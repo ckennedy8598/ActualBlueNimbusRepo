@@ -13,12 +13,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] Slider musicSlider;
     public void PlayGame()
     {
         SceneManager.LoadScene(1);
+        setVolume();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -35,5 +38,23 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    private void setVolume()
+    {
+        if (!PlayerPrefs.HasKey("musicVolume"))
+        {
+            PlayerPrefs.SetFloat("musicVolume", .5f);
+            loadPreference();
+        }
+        else
+        {
+            loadPreference();
+        }
+    }
+
+    private void loadPreference()
+    {
+        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
     }
 }
