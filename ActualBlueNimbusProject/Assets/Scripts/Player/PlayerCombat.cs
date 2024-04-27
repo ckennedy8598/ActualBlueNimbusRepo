@@ -20,6 +20,9 @@ using UnityEngine.UI;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [Header("Pause Menu Reference")]
+    public PauseMenu PauseMenuScript;
+
     [Header("Player Enemy Collider Reference")]
     private Collider2D coll;
 
@@ -57,21 +60,20 @@ public class PlayerCombat : MonoBehaviour
     private float maxDamage = 100f;
     private float currentChargeTime = 0f;
 
-
-
     [Header("Sound Effects")]
     [SerializeField] private AudioSource attackSFX;
     [SerializeField] private AudioSource deathSFX;
     
     private void Start()
     {
+        PauseMenuScript = FindObjectOfType<PauseMenu>();
         coll = GetComponent<Collider2D>();
         playerHealth = maxHealth; 
 
         loseText.enabled = false;
         retry.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(false);
-        
+
         // Moved as when unassigned they were throwing an error
         // and returning out of Start() before other code was
         // being set.
@@ -83,6 +85,11 @@ public class PlayerCombat : MonoBehaviour
     {
         // If player object does not exist, return
         if (gameObject == null)
+        {
+            return;
+        }
+
+        if (PauseMenuScript.getIsPaused() == true)
         {
             return;
         }

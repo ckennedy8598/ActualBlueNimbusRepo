@@ -37,14 +37,14 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    private void setButtonsActive()
+    public void setButtonsActive()
     {
         Resume.gameObject.SetActive(true);
         Options.gameObject.SetActive(true);
         MainMenu.gameObject.SetActive(true);
         Quit.gameObject.SetActive(true);
     }
-    private void setButtonsDeactive()
+    public void setButtonsDeactive()
     {
         Resume.gameObject.SetActive(false);
         Options.gameObject.SetActive(false);
@@ -69,5 +69,15 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         Time.timeScale = 1;
+    }
+
+    public void setIsPaused()
+    {
+        paused = false;
+    }
+
+    public bool getIsPaused()
+    {
+        return paused;
     }
 }

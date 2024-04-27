@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2751267567338120388}
   - component: {fileID: 8164489275492841597}
   - component: {fileID: 6216282431613340959}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -299,6 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb3233ce459f9346a704dff5d9c8bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PauseMenuScript: {fileID: 0}
   animator: {fileID: 1268588502197070142}
   loseText: {fileID: 0}
   retry: {fileID: 0}
