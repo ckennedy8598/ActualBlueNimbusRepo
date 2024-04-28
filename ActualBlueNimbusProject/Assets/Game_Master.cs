@@ -8,6 +8,7 @@ public class Game_Master : MonoBehaviour
 
     private static Game_Master instance;
     public Vector2 lastCheckpointPos;
+    
     private void Awake()
     {
         if(instance == null)
@@ -28,5 +29,6 @@ public class Game_Master : MonoBehaviour
     void Update()
     {
         
+       
     }
 }

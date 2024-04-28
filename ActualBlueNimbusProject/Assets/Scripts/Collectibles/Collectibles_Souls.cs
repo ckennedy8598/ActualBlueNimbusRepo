@@ -5,6 +5,7 @@ using UnityEngine;
 public class Collectibles_Souls : MonoBehaviour
 {
     public int x;
+    
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -12,6 +13,7 @@ public class Collectibles_Souls : MonoBehaviour
         {
             Destroy(gameObject);
             Collectibles_Soul_Counter.instance.IncreaseSouls(x);
+            
         }
     }
 }
