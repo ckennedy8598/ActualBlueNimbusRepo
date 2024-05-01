@@ -24,7 +24,7 @@ public class Boss_Axe_Hitbox : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(UnityEngine.Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
