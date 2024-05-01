@@ -62,7 +62,8 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] private AudioSource attackSFX;
-    [SerializeField] private AudioSource deathSFX;
+    [SerializeField] private AudioClip heavyAttackSFX;
+    [SerializeField] private AudioClip deathSFX;
     
     private void Start()
     {
@@ -131,6 +132,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 Debug.Log("Heavy Attacking");
                 animator.SetTrigger("isHeavyAttacking");
+                AudioSource.PlayClipAtPoint(heavyAttackSFX, attackPoint.transform.position);
 
                 heavyInput = true;
                 float chargeRatio = currentChargeTime / maxChargeTime;
@@ -205,7 +207,7 @@ public class PlayerCombat : MonoBehaviour
         if (playerHealth <= 0)
         {
             Die();
-            LoseScreen();
+            //LoseScreen();
         }
     }
 
@@ -242,7 +244,9 @@ public class PlayerCombat : MonoBehaviour
     {
         if (gameObject != null)
         {
+            LoseScreen();
             Destroy(gameObject);
+            AudioSource.PlayClipAtPoint(deathSFX, this.gameObject.transform.position);
         }
     }
 

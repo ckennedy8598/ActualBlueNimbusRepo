@@ -7,10 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField] TMP_Text Volume;
     [SerializeField] public Button Resume;
     [SerializeField] public Button Options;
     [SerializeField] public Button MainMenu;
     [SerializeField] public Button Quit;
+
+    [SerializeField] public GameObject optionsMenu;
+    [SerializeField] public GameObject controlsMenu;
+
     public bool paused = false;
     // Update is called once per frame
     void Update()
@@ -34,6 +39,8 @@ public class PauseMenu : MonoBehaviour
             paused = false;
             ResumeGame();
             setButtonsDeactive();
+            setControlsOff();
+            optionsTestOff();
         }
     }
 
@@ -52,9 +59,29 @@ public class PauseMenu : MonoBehaviour
         Quit.gameObject.SetActive(false);
     }
 
+    public void setControlsOn()
+    {
+        controlsMenu.SetActive(true);
+    }
+
+    public void setControlsOff()
+    {
+        controlsMenu.SetActive(false);
+    }
+
+    public void optionsTestOn()
+    {
+        optionsMenu.SetActive(true);
+    }
+
+    public void optionsTestOff()
+    {
+        optionsMenu.SetActive(false);
+    }
+
     public void GoToMainMenu()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     public void QuitGame()

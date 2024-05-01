@@ -12,6 +12,7 @@ public class Fireball : MonoBehaviour
     [SerializeField] private float despawnTimer = 10;
     private bool isRight = true;
 
+    [SerializeField] public AudioClip FireballSound;
 
     private int damage = 50;
 
@@ -76,10 +77,12 @@ public class Fireball : MonoBehaviour
                 other.GetComponent<enemScriptKnight>().KnightEnemyTakeDamage(damage);
                 Debug.Log("Hit Knight!");
             }
+            AudioSource.PlayClipAtPoint(FireballSound, this.gameObject.transform.position);
             Destroy(gameObject);
         }
         else
         {
+            AudioSource.PlayClipAtPoint(FireballSound, this.gameObject.transform.position);
             Destroy(gameObject);
         }
     }

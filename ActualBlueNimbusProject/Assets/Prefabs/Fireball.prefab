@@ -194,5 +194,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 0}
-  force: 3
+  force: 6
   despawnTimer: 10
+  FireballSound: {fileID: 8300000, guid: e08eb50ba187d804ba7a48fdf51aeea2, type: 3}
