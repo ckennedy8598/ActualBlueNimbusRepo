@@ -64,6 +64,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private AudioSource attackSFX;
     [SerializeField] private AudioClip heavyAttackSFX;
     [SerializeField] private AudioClip deathSFX;
+    [SerializeField] private AudioClip playergetshitSFX;
     
     private void Start()
     {
@@ -202,6 +203,7 @@ public class PlayerCombat : MonoBehaviour
             Debug.Log("Played");*/
             StartCoroutine(Invul());
             //Debug.Log("State of CanBeHit: " + canBeHit);
+            AudioSource.PlayClipAtPoint(playergetshitSFX, this.gameObject.transform.position);
         }
 
         if (playerHealth <= 0)

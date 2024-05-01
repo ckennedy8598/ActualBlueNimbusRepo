@@ -319,6 +319,7 @@ MonoBehaviour:
   attackSFX: {fileID: 1696275099516298936}
   heavyAttackSFX: {fileID: 8300000, guid: 134326e30e667ce4c85cc61116b4a1dd, type: 3}
   deathSFX: {fileID: 3473718060053484583}
+  playergetshitSFX: {fileID: 8300000, guid: 167a80f38da58984a85ff314c7eb022a, type: 3}
 --- !u!114 &2244659336451164140
 MonoBehaviour:
   m_ObjectHideFlags: 0
