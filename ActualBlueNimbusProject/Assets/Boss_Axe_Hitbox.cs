@@ -16,6 +16,10 @@ public class Boss_Axe_Hitbox : MonoBehaviour
         {
             Debug.LogError("PlayerCombat component not found in the scene.");
         }
+        else
+        {
+            Debug.Log("Player health script found");
+        }
     }
 
     // Update is called once per frame
@@ -26,7 +30,7 @@ public class Boss_Axe_Hitbox : MonoBehaviour
 
     public void OnTriggerEnter2D(UnityEngine.Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             playerHealth.TakeDamage(damage);
             Debug.Log("Player Taking Damage");

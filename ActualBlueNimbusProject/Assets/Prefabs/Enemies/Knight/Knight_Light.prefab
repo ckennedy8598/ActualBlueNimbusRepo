@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 320013571408451618}
   - component: {fileID: 7963943463686628252}
+  - component: {fileID: 3173621495646925781}
   m_Layer: 8
   m_Name: AttackHitbox
   m_TagString: Untagged
@@ -77,6 +78,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3755417, y: 0.3034792}
   m_EdgeRadius: 0
+--- !u!114 &3173621495646925781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958039773311862506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced253fbdefc3c449a6c8efb3eb43b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  damage: 2
+  playerHealth: {fileID: 0}
+  maxHealth: 5000
+  currentHealth: 0
+  soulValue: 0
 --- !u!1 &6576417471435161031
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 2152511261872165813}
-  damage: 2
+  damage: 0
   playerHealth: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
