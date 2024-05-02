@@ -62,6 +62,7 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] private AudioSource attackSFX;
+    [SerializeField] private AudioSource attackContactSFX;
     [SerializeField] private AudioClip heavyAttackSFX;
     [SerializeField] private AudioClip deathSFX;
     [SerializeField] private AudioClip playergetshitSFX;
@@ -141,11 +142,7 @@ public class PlayerCombat : MonoBehaviour
                 heavyInput = true;
                 float chargeRatio = currentChargeTime / maxChargeTime;
                 float damage = Mathf.Lerp(minDamage, maxDamage, chargeRatio);
-                if (currentChargeTime == maxChargeTime)
-                {
-                    Fireball_Attack();
-                    Debug.Log("Fireball!!!!!!!");
-                }
+
                 StartCoroutine(heavyAttackCD(damage));
             }
         }
@@ -169,11 +166,13 @@ public class PlayerCombat : MonoBehaviour
             if (enemy.GetComponent<Enemy>() != null)
             {
                 enemy.GetComponent<Enemy>().EnemyTakeDamage(attackDamage);
+                attackContactSFX.Play();
             }
 
             if (enemy.GetComponent<enemScriptKnight>() != null)
             {
                 enemy.GetComponent<enemScriptKnight>().KnightEnemyTakeDamage(attackDamage);
+                attackContactSFX.Play();
             }
         }
     }
@@ -187,11 +186,13 @@ public class PlayerCombat : MonoBehaviour
             if (enemy.GetComponent<Enemy>() != null)
             {
                 enemy.GetComponent<Enemy>().EnemyTakeDamage(damage);
+                attackContactSFX.Play();
             }
 
             if (enemy.GetComponent<enemScriptKnight>() != null)
             {
                 enemy.GetComponent<enemScriptKnight>().KnightEnemyTakeDamage(damage);
+                attackContactSFX.Play();
             }
         }
     }
@@ -219,7 +220,12 @@ public class PlayerCombat : MonoBehaviour
     private IEnumerator heavyAttackCD(float damage)
     {
         //Debug.Log("Heavy Attack: Start");
-        yield return new WaitForSeconds(.75f);
+        yield return new WaitForSeconds(.70f);
+        if (currentChargeTime == maxChargeTime)
+        {
+            Fireball_Attack();
+            Debug.Log("Fireball!!!!!!!");
+        }
         heavyAttack(damage);
         currentChargeTime = 0f;
         isCharging = false;
