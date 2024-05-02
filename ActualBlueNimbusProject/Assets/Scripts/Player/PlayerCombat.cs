@@ -37,13 +37,13 @@ public class PlayerCombat : MonoBehaviour
     [Header("Damage Variables")]
     public LayerMask enemyLayers;
     public Transform attackPoint;
-    private float attackRange = .5f;
+    private float attackRange = 2f;
     private int attackDamage = 50;
 
     [Header("Health Variables")]
     public int playerHealth = 0;
     public bool canBeHit = true;
-    private int maxHealth = 5;
+    public int maxHealth = 5;
     public Slider slider;
 
     [Header("Attack Variables")]
@@ -85,6 +85,9 @@ public class PlayerCombat : MonoBehaviour
 
     void Update()
     {
+        // Update for slider to reflect player health after updating
+        slider.value = playerHealth;
+
         // If player object does not exist, return
         if (gameObject == null)
         {
@@ -216,7 +219,7 @@ public class PlayerCombat : MonoBehaviour
     private IEnumerator heavyAttackCD(float damage)
     {
         //Debug.Log("Heavy Attack: Start");
-        yield return new WaitForSeconds(.85f);
+        yield return new WaitForSeconds(.75f);
         heavyAttack(damage);
         currentChargeTime = 0f;
         isCharging = false;
@@ -246,6 +249,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (gameObject != null)
         {
+            slider.value = 0f;
             LoseScreen();
             Destroy(gameObject);
             AudioSource.PlayClipAtPoint(deathSFX, this.gameObject.transform.position);

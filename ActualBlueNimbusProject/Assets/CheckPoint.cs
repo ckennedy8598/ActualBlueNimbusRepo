@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
+    public PlayerCombat playerHealth;
     private Game_Master gm;
     
     // Start is called before the first frame update
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<Game_Master>();
+        playerHealth = GameObject.FindAnyObjectByType<PlayerCombat>();
     }
    
 
@@ -18,6 +20,7 @@ public class CheckPoint : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             gm.lastCheckpointPos = transform.position;
+            playerHealth.playerHealth = playerHealth.maxHealth;
             Debug.Log("Checkpoint");
         }
     }

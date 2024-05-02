@@ -92347,6 +92347,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9220630086823071434, guid: 9c532d388ac8fbd4e9ae412af0345881, type: 3}
+      propertyPath: m_text
+      value: 'Move Left: A
+
+        Move Right: D
+
+        Quick-Drop: S (in Air)
+
+        Jump:
+        Spacebar
+
+        Dash: Left Shift
+
+        Light Attack: Left Click
+
+        Heavy
+        Attack: Hold Right Click
+
+        Fireball: Max Charge Attack'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
