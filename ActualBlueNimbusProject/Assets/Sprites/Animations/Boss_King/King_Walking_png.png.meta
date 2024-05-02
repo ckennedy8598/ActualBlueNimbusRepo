@@ -108,7 +108,196 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: King_Walking_png_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3328
+        width: 2080
+        height: 1664
+      alignment: 9
+      pivot: {x: 0.7619267, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16444fcbde9a2dc4b8479b65b33ad2fb
+      internalID: 591369524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: King_Walking_png_1
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 3328
+        width: 2080
+        height: 1664
+      alignment: 9
+      pivot: {x: 0.7619267, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acc1b7571aa7f4344816f7e2918c279c
+      internalID: -578994882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: King_Walking_png_2
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 3328
+        width: 2080
+        height: 1664
+      alignment: 9
+      pivot: {x: 0.7619267, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fc4d057cd3fc4645b7d99fe148b83c9
+      internalID: -863712761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: King_Walking_png_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1664
+        width: 2080
+        height: 1652
+      alignment: 9
+      pivot: {x: 0.7619267, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2774f9042d8f80645b1639e84230bf1b
+      internalID: 2131169421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: King_Walking_png_4
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 1664
+        width: 2080
+        height: 1646
+      alignment: 9
+      pivot: {x: 0.7619267, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 713370d25522c534cb4f6c921bb8b87c
+      internalID: -364431581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: King_Walking_png_5
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 1668
+        width: 2080
+        height: 1664
+      alignment: 9
+      pivot: {x: 0.7619267, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 12}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d577d5c658b27144f886737dde94bdc5
+      internalID: -427881910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: King_Walking_png_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2080
+        height: 1664
+      alignment: 9
+      pivot: {x: 0.7619267, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 19}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 188305f15f3ca504789f045adc259572
+      internalID: 2000110814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: King_Walking_png_7
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 0
+        width: 2080
+        height: 1664
+      alignment: 9
+      pivot: {x: 0.7619267, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 19}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb5e4d093a8e84d4d8c7d9d8f18abd0e
+      internalID: -1187562557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: King_Walking_png_8
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 0
+        width: 2080
+        height: 1664
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 232a97d72f2fa974f80c29ba30f40a30
+      internalID: -1107356120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +308,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      King_Walking_png_0: 591369524
+      King_Walking_png_1: -578994882
+      King_Walking_png_2: -863712761
+      King_Walking_png_3: 2131169421
+      King_Walking_png_4: -364431581
+      King_Walking_png_5: -427881910
+      King_Walking_png_6: 2000110814
+      King_Walking_png_7: -1187562557
+      King_Walking_png_8: -1107356120
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
