@@ -86,6 +86,11 @@ public class Fireball : MonoBehaviour
                 other.GetComponent<enemScriptKnight>().KnightEnemyTakeDamage(damage);
                 Debug.Log("Hit Knight!");
             }
+            if (other.GetComponent<Shield_Enemy_Script>() != null)
+            {
+                other.GetComponent<Shield_Enemy_Script>().EnemyTakeDamage();
+                Debug.Log("Hit Shield Knight!");
+            }
             AudioSource.PlayClipAtPoint(FireballSound, this.gameObject.transform.position);
             Destroy(gameObject);
         }

@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7177e9d82e62d224ba847edd7551d9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRange: 500
+  sightRange: 200
 --- !u!1101 &7379960208150946644
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

@@ -44,15 +44,16 @@ public class enemScriptKnight : MonoBehaviour
             StartCoroutine(DestroyBody());
         }
     }
+    
 
     // Enemy to player collision damage
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            playerHealth.TakeDamage(damage);
-        }
-    }
+    //public void OnCollisionEnter2D(Collision2D collision)
+    //{
+       // if (collision.gameObject.tag == "Player")
+       // {
+            //playerHealth.TakeDamage(damage);
+       // }
+    //}
 
     private void Die()
     {

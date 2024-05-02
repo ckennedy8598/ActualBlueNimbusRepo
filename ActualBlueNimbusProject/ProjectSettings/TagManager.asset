@@ -8,6 +8,7 @@ TagManager:
   - GM
   - LevelSpawn
   - Enemy
+  - FireBall
   layers:
   - Default
   - TransparentFX
