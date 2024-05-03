@@ -97,6 +97,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (PauseMenuScript.getIsPaused() == true)
         {
+            Debug.Log("This is paused: " + PauseMenuScript.getIsPaused());
             return;
         }
 
