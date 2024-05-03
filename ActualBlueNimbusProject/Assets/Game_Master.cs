@@ -10,8 +10,7 @@ public class Game_Master : MonoBehaviour
     private static Game_Master instance;
     public Vector2 lastCheckpointPos;
 
-    public static int totalSouls;
-    public Collectibles_Soul_Counter CS;
+    
     private void Awake()
     {
         
@@ -28,22 +27,14 @@ public class Game_Master : MonoBehaviour
     }
     void Start()
     {
-        CS = GetComponent<Collectibles_Soul_Counter>();
+        
     }
 
-    
+
     // Update is called once per frame
     void Update()
     {
-        
-        if (CS.currentSouls >= totalSouls)
-        {
-            totalSouls = CS.currentSouls;
-        }
-        else if (totalSouls > CS.currentSouls)
-        {
-            CS.currentSouls = totalSouls;
-        }
+
     }
 
 }
