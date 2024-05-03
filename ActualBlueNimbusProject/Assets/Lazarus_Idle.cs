@@ -5,7 +5,7 @@ using UnityEngine;
 public class Lazarus_Idle : StateMachineBehaviour
 {
 
-    public float sightRange = 50f;
+    public float sightRange = 60f;
 
     Transform player;
     Rigidbody2D rb;

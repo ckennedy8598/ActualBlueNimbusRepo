@@ -11,14 +11,28 @@ public class Collectibles_Soul_Counter : MonoBehaviour
     public TMP_Text soulText;
     public int currentSouls = 0;
 
+    
+
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+
     }
     // Start is called before the first frame update
     void Start()
     {
-        soulText.text = "Souls: " + currentSouls.ToString();
+        
+      soulText.text = "Souls: " + currentSouls.ToString();
+        
     }
 
     // Update is called once per frame
@@ -35,4 +49,5 @@ public class Collectibles_Soul_Counter : MonoBehaviour
         Debug.Log("SOUL SOUND PLAYED");
         // if anything goes wrong with the souls look here bc I (CK) added lines lmao
     }
+    
 }
