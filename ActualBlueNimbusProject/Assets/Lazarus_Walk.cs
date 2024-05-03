@@ -36,6 +36,7 @@ public class Lazarus_Walk : StateMachineBehaviour
 
             if (Vector2.Distance(player.position, rb.position) <= attackRange)
             {
+                Debug.Log("Beginning Attack");
                 animator.SetTrigger("StartAttack");
             }
         

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Lazarus_Idle : StateMachineBehaviour
 {
 
-    public float sightRange = 500f;
+    public float sightRange = 50f;
 
     Transform player;
     Rigidbody2D rb;
@@ -21,6 +21,7 @@ public class Lazarus_Idle : StateMachineBehaviour
     {
         if (Vector2.Distance(player.position, rb.position) <= sightRange)
         {
+            Debug.Log("Player Spotted");
             animator.SetTrigger("StartWalk");
         }
     }

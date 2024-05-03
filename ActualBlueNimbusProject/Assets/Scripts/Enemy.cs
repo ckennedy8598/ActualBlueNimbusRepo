@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
     public float currentHealth;
 
     public int soulValue;
+    [SerializeField] private float deathTimer = 2.5f;
     void Start()
     {
         currentHealth = maxHealth;
@@ -81,7 +82,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DestroyBody()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(deathTimer);
         Destroy(gameObject);
         Collectibles_Soul_Counter.instance.IncreaseSouls(soulValue);
     }
