@@ -15,25 +15,18 @@ public class Collectibles_Soul_Counter : MonoBehaviour
     {
         instance = this;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
-        soulText.text = "Souls: " + GetInt("Souls");
         if (GetInt("Souls") > 0)
         {
             currentSouls = GetInt("Souls");
-            return;
         }
         else
         {
             PlayerPrefs.SetInt("Souls", 0);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        soulText.text = "Souls: " + GetInt("Souls");
     }
 
     public void IncreaseSouls(int x)
