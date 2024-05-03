@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Slider musicSlider;
     public void PlayGame()
     {
+        PlayerPrefs.SetInt("Souls", 0);
         SceneManager.LoadScene(1);
         setVolume();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
