@@ -11,28 +11,23 @@ public class Collectibles_Soul_Counter : MonoBehaviour
     public TMP_Text soulText;
     public int currentSouls = 0;
 
-    
-
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(instance);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-
+        instance = this;
     }
     // Start is called before the first frame update
     void Start()
     {
-        
-      soulText.text = "Souls: " + currentSouls.ToString();
-        
+        soulText.text = "Souls: " + GetInt("Souls");
+        if (GetInt("Souls") > 0)
+        {
+            currentSouls = GetInt("Souls");
+            return;
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Souls", 0);
+        }
     }
 
     // Update is called once per frame
@@ -44,10 +39,20 @@ public class Collectibles_Soul_Counter : MonoBehaviour
     public void IncreaseSouls(int x)
     {
         currentSouls += x;
-        soulText.text = "Souls: " + currentSouls.ToString();
+        PlayerPrefs.SetInt("Souls", currentSouls);
+        soulText.text = "Souls: " + GetInt("Souls");
         Soulnoise.Play();
         Debug.Log("SOUL SOUND PLAYED");
         // if anything goes wrong with the souls look here bc I (CK) added lines lmao
     }
-    
+
+    public void SetInt(string KeyName, int Value)
+    {
+        PlayerPrefs.SetInt("souls", Value);
+    }
+
+    public int GetInt(string KeyName)
+    {
+        return PlayerPrefs.GetInt(KeyName);
+    }
 }
