@@ -9,13 +9,13 @@ public class LoadCredits : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ZephyrScript = FindObjectOfType<Enemy>();
+        //ZephyrScript = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ZephyrScript.currentHealth <= 0)
+        if (ZephyrScript == null)
         { 
             StartCoroutine(loadCredts());
         }
@@ -23,7 +23,7 @@ public class LoadCredits : MonoBehaviour
 
     private IEnumerator loadCredts()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
