@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     public PlayerCombat PlayerHealth;
     public PlayerCombat isCharging;
 
-    [Header ("Player Body Reference")]
+    [Header("Player Body Reference")]
     private Rigidbody2D rb;
     private BoxCollider2D coll;
 
@@ -35,7 +35,8 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask jumpableGround;
     [SerializeField] private LayerMask jumpableWalls;
 
-    [Header ("Movement and Jumping")]
+    [Header("Movement and Jumping")]
+    public bool canMove = true;
     private float horizontalInput = 0f;
     private bool quickDrop = true;
     private bool doubleJumpCheck = true;
@@ -43,30 +44,30 @@ public class Player : MonoBehaviour
     private bool jumpKeyPressed;
     private bool downKey;
 
-    [Header ("Wall Sliding")]
+    [Header("Wall Sliding")]
     [SerializeField] private Transform frontCheck;
     [SerializeField] private float wallSlidingSpeed;
     public bool facingRight = true;
     private bool isTouchingFront;
     private bool wallSliding;
-    
-    [Header ("Circle radius for front check")]
+
+    [Header("Circle radius for front check")]
     private float checkRadius = .04f;
 
-    [Header ("Wall Jumping")]
+    [Header("Wall Jumping")]
     [SerializeField] private float xWallForce;
     [SerializeField] private float yWallForce;
     [SerializeField] private float wallJumpTime;
     private bool wallJumping;
 
-    [Header ("Dashing")]
+    [Header("Dashing")]
     [SerializeField] private float dashSpeed = 42f;
     [SerializeField] private float dashTime = .2f;
     [SerializeField] private float dashCooldown = 1f;
     private bool canDash = true;
     private bool isDashing;
 
-    [Header ("Sound Effects")]
+    [Header("Sound Effects")]
     [SerializeField] private AudioSource backgroundMusic;
     [SerializeField] private AudioSource jumpSoundEffect;
     [SerializeField] private AudioSource dashSoundEffect;
@@ -89,7 +90,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerHealth.GetIsCharging())
+        if (PlayerHealth.GetIsCharging() || canMove == false)
         {
             horizontalInput = 0;
             return;
@@ -285,6 +286,11 @@ public class Player : MonoBehaviour
         canDash = true;
     }
 
+    public bool SetCanMove()
+    {
+        canMove = !canMove;
+        return canMove;
+    }
     public bool GetFacingRight()
     {
         return facingRight;

@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 public class AcquireScythe : MonoBehaviour
 {
     [SerializeField] Animator noScythe;
+    public Player playerScript;
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerScript = FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
@@ -28,8 +29,10 @@ public class AcquireScythe : MonoBehaviour
 
     public IEnumerator ScytheGet()
     {
+        playerScript.SetCanMove();
         noScythe.SetTrigger("AcquireScythe");
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(7);
+        playerScript.SetCanMove();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
