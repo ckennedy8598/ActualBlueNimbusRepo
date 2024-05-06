@@ -9,6 +9,7 @@ TagManager:
   - LevelSpawn
   - Enemy
   - FireBall
+  - LevelEnd
   layers:
   - Default
   - TransparentFX

@@ -315,6 +315,7 @@ MonoBehaviour:
   maxHealth: 5
   slider: {fileID: 0}
   attackRate: 2
+  canHeavyAttack: 1
   Fireball: {fileID: 8136045411414712166, guid: d8e3286633b05ef4498f827cac914aeb, type: 3}
   FireballPos: {fileID: 8207762386270295857}
   isCharging: 0

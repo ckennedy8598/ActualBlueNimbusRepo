@@ -275,6 +275,7 @@ public class Player : MonoBehaviour
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+        Debug.Log("IsDashing = True");
         yield return new WaitForSeconds(dashTime);
         PlayerHealth.CanBeHit();
         //Debug.Log("State of CanBeHit: " PlayerHealth.CanBeHit());

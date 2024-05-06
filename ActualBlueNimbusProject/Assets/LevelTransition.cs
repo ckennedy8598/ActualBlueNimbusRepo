@@ -15,7 +15,7 @@ public class LevelTransition : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             resetCheckPoint = GameObject.FindGameObjectWithTag("GM").GetComponent<Game_Master>();
             resetCheckPoint.lastCheckpointPos = SpawnPOS;
 

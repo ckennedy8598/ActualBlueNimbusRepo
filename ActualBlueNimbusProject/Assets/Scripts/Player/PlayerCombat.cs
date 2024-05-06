@@ -52,6 +52,7 @@ public class PlayerCombat : MonoBehaviour
     private bool heavyInput = false;
 
     [Header("Heavy Attack Variables")]
+    [SerializeField] private bool canHeavyAttack = true;
     public GameObject Fireball;
     public Transform FireballPos;
     public bool isCharging = false;
@@ -111,7 +112,7 @@ public class PlayerCombat : MonoBehaviour
         }
 
         // Heavy Attack Input
-        if (isCharging == false)
+        if (isCharging == false && canHeavyAttack)
         {
             if (Input.GetMouseButton(1))
             {
@@ -132,7 +133,7 @@ public class PlayerCombat : MonoBehaviour
         }
 
         // Heavy Attack Release + Calculate Damage Ratio
-        if (Input.GetMouseButtonUp(1) && heavyInput == false)
+        if (Input.GetMouseButtonUp(1) && heavyInput == false && canHeavyAttack)
         {
             if (isCharging)
             {
