@@ -18,11 +18,22 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] Slider musicSlider;
+    public Game_Master GameMaster;
+    public PauseMenu PauseMenuScript;
+
+    private void Awake()
+    {
+        GameMaster = FindObjectOfType<Game_Master>();
+        PauseMenuScript = FindObjectOfType<PauseMenu>();
+        PauseMenuScript.setIsPaused();
+        GameMaster.lastCheckpointPos = new Vector2(26.33f, -3.61f);
+    }
     public void PlayGame()
     {
         PlayerPrefs.SetInt("Souls", 0);
         SceneManager.LoadScene(1);
         setVolume();
+
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

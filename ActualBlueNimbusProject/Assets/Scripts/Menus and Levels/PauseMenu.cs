@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour
 
     private void pauseMenu()
     {
-        if (!paused)
+        if (paused == false)
         {
             paused = true;
             PauseGame();
@@ -81,6 +81,8 @@ public class PauseMenu : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        Debug.Log("This is IsPaused" + getIsPaused());
+        setIsPaused();
         SceneManager.LoadScene(0);
     }
 
