@@ -1,18 +1,30 @@
+/*
+ * ****************************************************************************** *
+ * Created by Bobby Lapadula                                                      *
+ * Last Modified by Bobby Lapadula                                                *
+ * Date and Time: 4/128/2024 24:00                                                *
+ *                                                                                *
+ * This is the fireball script. It handles everything about the fireball. It is   *
+ * called when the fireball object is instantiated by the player's max charge     *
+ * attack. It references the Player script.                                       *
+ * ****************************************************************************** *
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
+    [SerializeField] public AudioClip FireballSound;
+    [SerializeField] private float force;
+    [SerializeField] private float despawnTimer = 10;
+
     public Player playerScript;
     private GameObject player;
     private Rigidbody2D rb;
-    [SerializeField] private float force;
     private float timer;
-    [SerializeField] private float despawnTimer = 10;
     private bool isRight = true;
-
-    private int damage = 2;
+    private int damage = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +32,8 @@ public class Fireball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = FindObjectOfType<Player>();
-        var variableNassme = player.transform.localScale;
+        Vector3 fireballScaler = transform.localScale;
+
 
         if (playerScript.GetFacingRight())
         {
@@ -30,11 +43,12 @@ public class Fireball : MonoBehaviour
         else
         {
             transform.Translate(-transform.right);
+            fireballScaler.x *= -1;
+            transform.localScale = fireballScaler;
             isRight = false;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isRight)
@@ -46,13 +60,7 @@ public class Fireball : MonoBehaviour
             transform.Translate((-transform.right * force * Time.deltaTime));
         }
 
-
-
-        if (player == null)
-        {
-            return;
-        }
-
+        // Despawn timer for projectile
         timer += Time.deltaTime;
 
         if (timer > despawnTimer)
@@ -61,26 +69,35 @@ public class Fireball : MonoBehaviour
         }
     }
 
-    // This gets called whenever the Arrow collides with something
-
+    // This gets called whenever the Fireball collides with something
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("Hit Enemy!");
             if (other.GetComponent<Enemy>() != null)
             {
                 other.GetComponent<Enemy>().EnemyTakeDamage(damage);
+                Debug.Log("Hit Archer!");
             }
 
             if (other.GetComponent<enemScriptKnight>() != null)
             {
                 other.GetComponent<enemScriptKnight>().KnightEnemyTakeDamage(damage);
+                Debug.Log("Hit Knight!");
             }
+            if (other.GetComponent<Shield_Enemy_Script>() != null)
+            {
+                other.GetComponent<Shield_Enemy_Script>().EnemyTakeDamage();
+                Debug.Log("Hit Shield Knight!");
+            }
+            AudioSource.PlayClipAtPoint(FireballSound, this.gameObject.transform.position);
             Destroy(gameObject);
         }
         else
         {
-            //Destroy(gameObject);
+            AudioSource.PlayClipAtPoint(FireballSound, this.gameObject.transform.position);
+            Destroy(gameObject);
         }
     }
 }

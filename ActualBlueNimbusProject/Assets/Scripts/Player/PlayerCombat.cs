@@ -20,6 +20,9 @@ using UnityEngine.UI;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [Header("Pause Menu Reference")]
+    public PauseMenu PauseMenuScript;
+
     [Header("Player Enemy Collider Reference")]
     private Collider2D coll;
 
@@ -34,13 +37,13 @@ public class PlayerCombat : MonoBehaviour
     [Header("Damage Variables")]
     public LayerMask enemyLayers;
     public Transform attackPoint;
-    private float attackRange = .5f;
+    private float attackRange = 2f;
     private int attackDamage = 50;
 
     [Header("Health Variables")]
     public int playerHealth = 0;
     public bool canBeHit = true;
-    private int maxHealth = 5;
+    public int maxHealth = 5;
     public Slider slider;
 
     [Header("Attack Variables")]
@@ -49,6 +52,7 @@ public class PlayerCombat : MonoBehaviour
     private bool heavyInput = false;
 
     [Header("Heavy Attack Variables")]
+    [SerializeField] private bool canHeavyAttack = true;
     public GameObject Fireball;
     public Transform FireballPos;
     public bool isCharging = false;
@@ -57,21 +61,23 @@ public class PlayerCombat : MonoBehaviour
     private float maxDamage = 100f;
     private float currentChargeTime = 0f;
 
-
-
     [Header("Sound Effects")]
     [SerializeField] private AudioSource attackSFX;
-    [SerializeField] private AudioSource deathSFX;
+    [SerializeField] private AudioSource attackContactSFX;
+    [SerializeField] private AudioClip heavyAttackSFX;
+    [SerializeField] private AudioClip deathSFX;
+    [SerializeField] private AudioClip playergetshitSFX;
     
     private void Start()
     {
+        PauseMenuScript = FindObjectOfType<PauseMenu>();
         coll = GetComponent<Collider2D>();
         playerHealth = maxHealth; 
 
         loseText.enabled = false;
         retry.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(false);
-        
+
         // Moved as when unassigned they were throwing an error
         // and returning out of Start() before other code was
         // being set.
@@ -81,9 +87,18 @@ public class PlayerCombat : MonoBehaviour
 
     void Update()
     {
+        // Update for slider to reflect player health after updating
+        slider.value = playerHealth;
+
         // If player object does not exist, return
         if (gameObject == null)
         {
+            return;
+        }
+
+        if (PauseMenuScript.getIsPaused() == true)
+        {
+            Debug.Log("This is paused: " + PauseMenuScript.getIsPaused());
             return;
         }
 
@@ -97,7 +112,7 @@ public class PlayerCombat : MonoBehaviour
         }
 
         // Heavy Attack Input
-        if (isCharging == false)
+        if (isCharging == false && canHeavyAttack)
         {
             if (Input.GetMouseButton(1))
             {
@@ -114,25 +129,22 @@ public class PlayerCombat : MonoBehaviour
         {
             currentChargeTime += Time.deltaTime;
             currentChargeTime = Mathf.Clamp(currentChargeTime, 0f, maxChargeTime);
-            Debug.Log("Current Charge Time: " + currentChargeTime);
+            //Debug.Log("Current Charge Time: " + currentChargeTime);
         }
 
         // Heavy Attack Release + Calculate Damage Ratio
-        if (Input.GetMouseButtonUp(1) && heavyInput == false)
+        if (Input.GetMouseButtonUp(1) && heavyInput == false && canHeavyAttack)
         {
             if (isCharging)
             {
                 Debug.Log("Heavy Attacking");
                 animator.SetTrigger("isHeavyAttacking");
+                AudioSource.PlayClipAtPoint(heavyAttackSFX, attackPoint.transform.position);
 
                 heavyInput = true;
                 float chargeRatio = currentChargeTime / maxChargeTime;
                 float damage = Mathf.Lerp(minDamage, maxDamage, chargeRatio);
-                if (currentChargeTime == maxChargeTime)
-                {
-                    Fireball_Attack();
-                    Debug.Log("Fireball!!!!!!!");
-                }
+
                 StartCoroutine(heavyAttackCD(damage));
             }
         }
@@ -156,11 +168,13 @@ public class PlayerCombat : MonoBehaviour
             if (enemy.GetComponent<Enemy>() != null)
             {
                 enemy.GetComponent<Enemy>().EnemyTakeDamage(attackDamage);
+                attackContactSFX.Play();
             }
 
             if (enemy.GetComponent<enemScriptKnight>() != null)
             {
                 enemy.GetComponent<enemScriptKnight>().KnightEnemyTakeDamage(attackDamage);
+                attackContactSFX.Play();
             }
         }
     }
@@ -174,11 +188,13 @@ public class PlayerCombat : MonoBehaviour
             if (enemy.GetComponent<Enemy>() != null)
             {
                 enemy.GetComponent<Enemy>().EnemyTakeDamage(damage);
+                attackContactSFX.Play();
             }
 
             if (enemy.GetComponent<enemScriptKnight>() != null)
             {
                 enemy.GetComponent<enemScriptKnight>().KnightEnemyTakeDamage(damage);
+                attackContactSFX.Play();
             }
         }
     }
@@ -193,19 +209,25 @@ public class PlayerCombat : MonoBehaviour
             Debug.Log("Played");*/
             StartCoroutine(Invul());
             //Debug.Log("State of CanBeHit: " + canBeHit);
+            AudioSource.PlayClipAtPoint(playergetshitSFX, this.gameObject.transform.position);
         }
 
         if (playerHealth <= 0)
         {
             Die();
-            LoseScreen();
+            //LoseScreen();
         }
     }
 
     private IEnumerator heavyAttackCD(float damage)
     {
         //Debug.Log("Heavy Attack: Start");
-        yield return new WaitForSeconds(.85f);
+        yield return new WaitForSeconds(.70f);
+        if (currentChargeTime == maxChargeTime)
+        {
+            Fireball_Attack();
+            Debug.Log("Fireball!!!!!!!");
+        }
         heavyAttack(damage);
         currentChargeTime = 0f;
         isCharging = false;
@@ -235,7 +257,10 @@ public class PlayerCombat : MonoBehaviour
     {
         if (gameObject != null)
         {
+            slider.value = 0f;
+            LoseScreen();
             Destroy(gameObject);
+            AudioSource.PlayClipAtPoint(deathSFX, this.gameObject.transform.position);
         }
     }
 

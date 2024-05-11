@@ -13,12 +13,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] Slider musicSlider;
+    public Game_Master GameMaster;
+    public PauseMenu PauseMenuScript;
+
+    private void Awake()
+    {
+        GameMaster = FindObjectOfType<Game_Master>();
+        PauseMenuScript = FindObjectOfType<PauseMenu>();
+        PauseMenuScript.setIsPaused();
+        GameMaster.lastCheckpointPos = new Vector2(26.33f, -3.61f);
+    }
     public void PlayGame()
     {
+        PlayerPrefs.SetInt("Souls", 0);
         SceneManager.LoadScene(1);
+        setVolume();
+
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -35,5 +50,23 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    private void setVolume()
+    {
+        if (!PlayerPrefs.HasKey("musicVolume"))
+        {
+            PlayerPrefs.SetFloat("musicVolume", .5f);
+            loadPreference();
+        }
+        else
+        {
+            loadPreference();
+        }
+    }
+
+    private void loadPreference()
+    {
+        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
     }
 }

@@ -113,12 +113,12 @@ TextureImporter:
       name: Heavy_Attack_Fire_blast_animation_png_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1120
-        width: 1280
-        height: 1120
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 11
+        y: 1130
+        width: 1269
+        height: 1110
+      alignment: 9
+      pivot: {x: 0.9, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: Heavy_Attack_Fire_blast_animation_png_1
       rect:
         serializedVersion: 2
-        x: 1280
-        y: 1120
-        width: 1280
-        height: 1120
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1299
+        y: 1135
+        width: 1261
+        height: 1105
+      alignment: 9
+      pivot: {x: 0.9, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: Heavy_Attack_Fire_blast_animation_png_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1280
-        height: 1120
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 19
+        y: 9
+        width: 1261
+        height: 1101
+      alignment: 9
+      pivot: {x: 0.9, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,7 +181,7 @@ TextureImporter:
         width: 1280
         height: 1120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

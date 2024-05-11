@@ -6,6 +6,7 @@ using TMPro;
 public class Collectibles_Soul_Counter : MonoBehaviour
 {
     public static Collectibles_Soul_Counter instance;
+    [SerializeField] private AudioSource Soulnoise;
 
     public TMP_Text soulText;
     public int currentSouls = 0;
@@ -14,21 +15,37 @@ public class Collectibles_Soul_Counter : MonoBehaviour
     {
         instance = this;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
-        soulText.text = "Souls: " + currentSouls.ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        if (GetInt("Souls") > 0)
+        {
+            currentSouls = GetInt("Souls");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Souls", 0);
+        }
+        soulText.text = "Souls: " + GetInt("Souls");
     }
 
     public void IncreaseSouls(int x)
     {
         currentSouls += x;
-        soulText.text = "Souls: " + currentSouls.ToString();
+        PlayerPrefs.SetInt("Souls", currentSouls);
+        soulText.text = "Souls: " + GetInt("Souls");
+        Soulnoise.Play();
+        Debug.Log("SOUL SOUND PLAYED");
+        // if anything goes wrong with the souls look here bc I (CK) added lines lmao
+    }
+
+    public void SetInt(string KeyName, int Value)
+    {
+        PlayerPrefs.SetInt("souls", Value);
+    }
+
+    public int GetInt(string KeyName)
+    {
+        return PlayerPrefs.GetInt(KeyName);
     }
 }

@@ -7,6 +7,9 @@ TagManager:
   - Checkpoint
   - GM
   - LevelSpawn
+  - Enemy
+  - FireBall
+  - LevelEnd
   layers:
   - Default
   - TransparentFX
@@ -23,7 +26,7 @@ TagManager:
   - HazardLayer
   - Fire?
   - BackgroundBackground
-  - 
+  - Souls
   - 
   - 
   - 

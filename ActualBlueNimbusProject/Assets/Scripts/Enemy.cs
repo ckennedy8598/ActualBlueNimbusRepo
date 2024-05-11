@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Enemy Contact Damage")]
     [SerializeField] public int damage = 2;
+    [SerializeField] private bool canDoContactDamage = true;
 
     [Header("Player Health Variables")]
     public PlayerCombat playerHealth;
@@ -31,6 +32,7 @@ public class Enemy : MonoBehaviour
     public float currentHealth;
 
     public int soulValue;
+    [SerializeField] private float deathTimer = 2.5f;
     void Start()
     {
         currentHealth = maxHealth;
@@ -59,7 +61,7 @@ public class Enemy : MonoBehaviour
     // Enemy to player collision damage
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && canDoContactDamage)
         {
             Debug.Log("Player Collision Damage");
             playerHealth.TakeDamage(damage);
@@ -81,7 +83,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DestroyBody()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(deathTimer);
         Destroy(gameObject);
         Collectibles_Soul_Counter.instance.IncreaseSouls(soulValue);
     }
