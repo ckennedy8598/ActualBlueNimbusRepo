@@ -1,81 +1,119 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental;
 using UnityEngine;
 
 public class EnemyArrowScript : MonoBehaviour
 {
-
-    /// 
-    /// This is the shooting and Ai script for the Bullet Object
-    /// For the most part, This *should* be good enough for a while
-    /// When the damage values are added, put the logic in the "On Trigger Enter 2D"
-    ///         - Christopher Bunnell
-    /// 
+    /// <summary>
+    /// Shooting and AI script for the Archer's arrow projectile.
+    ///
     /// Created by Christopher Bunnell
     /// Last Modified by Bobby Lapadula 3/15/2024 15:15
+    /// Updated 8/18/2026 to add null-reference protection.
+    /// </summary>
+
     private GameObject player;
     private Rigidbody2D rb;
+
+    [Header("Arrow Movement")]
     [SerializeField] private float force;
-    private float timer;
-    [SerializeField] private float despawnTimer = 10;
 
-    // Lines 21 - 26 Added by Bobby;
+    [Header("Arrow Lifetime")]
+    [SerializeField] private float despawnTimer = 10f;
+
     [Header("Enemy Contact Damage")]
-    [SerializeField] public int damage = 1;
+    [SerializeField] private int damage = 1;
 
-    // Calling TakeDamage function from PlayerCombat script;
-    public PlayerCombat playerHealth;
+    private float timer;
 
-    // Start is called before the first frame update
     void Start()
     {
+        // Get the arrow's Rigidbody2D.
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player");
 
-        Vector3 direction = player.transform.position - transform.position;
-        rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
-
-        float rot = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rot + 90);
-
-        // Initiates PlayerCombat script and checks for null.
-        playerHealth = FindObjectOfType<PlayerCombat>();
-        if (playerHealth == null)
+        if (rb == null)
         {
-            Debug.LogError("PlayerCombat component not found in the scene.");
-        }
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (player == null)
-        {
+            Debug.LogError(
+                "EnemyArrowScript: Arrow does not have a Rigidbody2D.",
+                gameObject);
+
+            Destroy(gameObject);
             return;
         }
 
+        // Find the active player.
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player == null)
+        {
+            Debug.LogWarning(
+                "EnemyArrowScript: No active GameObject with the Player tag was found. " +
+                "Destroying this arrow.",
+                gameObject);
+
+            Destroy(gameObject);
+            return;
+        }
+
+        // Calculate the direction toward the player.
+        Vector3 direction =
+            player.transform.position - transform.position;
+
+        // Launch the arrow.
+        rb.velocity =
+            new Vector2(direction.x, direction.y).normalized * force;
+
+        // Rotate the arrow toward the direction it is traveling.
+        float rot =
+            Mathf.Atan2(-direction.y, -direction.x) *
+            Mathf.Rad2Deg;
+
+        transform.rotation =
+            Quaternion.Euler(0f, 0f, rot + 90f);
+    }
+
+    void Update()
+    {
         timer += Time.deltaTime;
 
-        if (timer > despawnTimer)
+        // Destroy the arrow after its maximum lifetime.
+        if (timer >= despawnTimer)
         {
             Destroy(gameObject);
         }
     }
 
-    // This gets called whenever the Arrow collides with something
-
     void OnTriggerEnter2D(Collider2D other)
     {
+        // If the arrow hits the player, attempt to damage them.
+        if (other.CompareTag("Player"))
+        {
+            PlayerCombat playerHealth =
+                other.GetComponent<PlayerCombat>();
 
-        if (other.gameObject.CompareTag("Player"))
-        {
-            playerHealth.TakeDamage(damage);
+            // The player's collider may be on a child object,
+            // so check the parent as well.
+            if (playerHealth == null)
+            {
+                playerHealth =
+                    other.GetComponentInParent<PlayerCombat>();
+            }
+
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damage);
+            }
+            else
+            {
+                Debug.LogWarning(
+                    "EnemyArrowScript: Hit an object tagged Player, " +
+                    "but could not find PlayerCombat.",
+                    other.gameObject);
+            }
+
             Destroy(gameObject);
+            return;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+
+        // Destroy the arrow when it hits anything else.
+        Destroy(gameObject);
     }
 }
