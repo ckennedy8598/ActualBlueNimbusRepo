@@ -4,21 +4,47 @@ using UnityEngine;
 
 public class Lazarus_Idle : StateMachineBehaviour
 {
-
     public float sightRange = 60f;
 
     Transform player;
     Rigidbody2D rb;
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+
+    // OnStateEnter is called when a transition starts
+    // and the state machine starts to evaluate this state.
+    override public void OnStateEnter(
+        Animator animator,
+        AnimatorStateInfo stateInfo,
+        int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody2D>();
+
+        FindPlayer();
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    // OnStateUpdate is called on each Update frame
+    // between OnStateEnter and OnStateExit callbacks.
+    override public void OnStateUpdate(
+        Animator animator,
+        AnimatorStateInfo stateInfo,
+        int layerIndex)
     {
+        // The old Player may have been destroyed.
+        // Try to find a new Player if one exists.
+        if (player == null)
+        {
+            FindPlayer();
+
+            if (player == null)
+            {
+                return;
+            }
+        }
+
+        if (rb == null)
+        {
+            return;
+        }
+
         if (Vector2.Distance(player.position, rb.position) <= sightRange)
         {
             Debug.Log("Player Spotted");
@@ -26,21 +52,27 @@ public class Lazarus_Idle : StateMachineBehaviour
         }
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    // OnStateExit is called when a transition ends
+    // and the state machine finishes evaluating this state.
+    override public void OnStateExit(
+        Animator animator,
+        AnimatorStateInfo stateInfo,
+        int layerIndex)
     {
         animator.ResetTrigger("StartWalk");
     }
 
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
+    private void FindPlayer()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        else
+        {
+            player = null;
+        }
+    }
 }

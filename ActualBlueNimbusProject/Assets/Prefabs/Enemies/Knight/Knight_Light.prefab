@@ -92,10 +92,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   damage: 2
+  canDoContactDamage: 1
   playerHealth: {fileID: 0}
   maxHealth: 5000
   currentHealth: 0
   soulValue: 0
+  deathTimer: 2.5
 --- !u!1 &6576417471435161031
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,5 +324,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a240038a3c30a5b4093aeafa51ec6cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   isFlipped: 0

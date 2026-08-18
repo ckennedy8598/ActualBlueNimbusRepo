@@ -307,7 +307,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a240038a3c30a5b4093aeafa51ec6cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 709476458}
   isFlipped: 0
 --- !u!1 &17135648
 GameObject:
@@ -91594,7 +91593,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 887040346741218303, guid: c0a2bb4b622f51f448d8560015164c17, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 42.12
+      value: 39.85
       objectReference: {fileID: 0}
     - target: {fileID: 887040346741218303, guid: c0a2bb4b622f51f448d8560015164c17, type: 3}
       propertyPath: m_LocalPosition.y
@@ -92838,6 +92837,10 @@ PrefabInstance:
     - target: {fileID: 6406101839125199103, guid: 2b38d4ea703988d4db0b0f88c7b7655b, type: 3}
       propertyPath: currentHealth
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406101839125199103, guid: 2b38d4ea703988d4db0b0f88c7b7655b, type: 3}
+      propertyPath: canDoContactDamage
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6997675314979123231, guid: 2b38d4ea703988d4db0b0f88c7b7655b, type: 3}
       propertyPath: m_Size.x
