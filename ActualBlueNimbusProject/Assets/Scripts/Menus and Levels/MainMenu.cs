@@ -1,7 +1,7 @@
 /*
  * ****************************************************************************** *
  * Created by Bobby Lapadula                                                      *
- * Last Modified by Bobby Lapadula                                                *
+ * Last Modified by CK (8-18-26) to add credits button functionality.             *
  * Date and Time: 3/15/2024 14:16                                                 *
  *                                                                                *
  * This is the main menu script. It contains the methods used for user interface  *
@@ -47,6 +47,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void Credits_Button()
+    {
+        SceneManager.LoadScene(6);
+    }
     public void QuitGame()
     {
         Application.Quit();

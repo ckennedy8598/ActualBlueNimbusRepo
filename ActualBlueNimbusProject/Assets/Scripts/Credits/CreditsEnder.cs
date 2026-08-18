@@ -15,7 +15,7 @@ public class CreditsEnder : MonoBehaviour
     private IEnumerator EndScene()
     {
         yield return new WaitForSeconds(50);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(7);
         PlayerPrefs.SetInt("Souls", 0);
     }
 }

@@ -372,50 +372,38 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Blue Nimbus Members:
 
-    
 
     Douglas Tompkins
 
-    
 
-    Christopher
-    Kennedy
+    Christopher Kennedy
 
-    
 
-    Bobby Lapadula
+    Bobby
+    Lapadula
 
-    
 
     Christopher Bunnell
 
-    
 
-    Michael
-    Hernandez
+    Michael Hernandez
 
-    
 
     Sean Juan
 
-    
 
-    Hector Castillo
+    Hector
+    Castillo
 
-    
 
-    Colin
-    Murray
+    Colin Murray
 
-    
 
     Sonny Santiago
 
-    
 
     Draven Morris
 
-    
 
     Aiden
     Ertz'
@@ -1344,7 +1332,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '@AnthonyCartelle
+  m_text: 'Special Thanks:
+
+
+    @AnthonyCartelle
 
     @AnthonyCartelle
 
@@ -2070,8 +2061,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Special Thanks:
 
-    Our Professor, Professor Morrison for being a great
-    teacher and giving us the opportunity to pursue our dreams.'
+    Professor Ryan Morrison for being a great teacher
+    and giving us the opportunity to pursue our dreams.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d12a1caecbfe604b9168eae25d4ab91, type: 2}
   m_sharedMaterial: {fileID: 5874230936763207409, guid: 1d12a1caecbfe604b9168eae25d4ab91, type: 2}
