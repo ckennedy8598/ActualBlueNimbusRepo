@@ -1294,8 +1294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3fe64559dd958a49afae086e1b9a956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSlider: {fileID: 0}
-  GameMaster: {fileID: 0}
+  musicSlider: {fileID: 830339657}
+  GameMaster: {fileID: 862691523}
   PauseMenuScript: {fileID: 0}
 --- !u!1 &560655059
 GameObject:

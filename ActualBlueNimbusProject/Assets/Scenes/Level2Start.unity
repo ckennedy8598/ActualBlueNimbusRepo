@@ -91438,6 +91438,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2807728393980793003}
     - target: {fileID: 7445659527426344315, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
+      propertyPath: deathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: c3dc460c36a793b42868d6c352b62b65, type: 3}
+    - target: {fileID: 7445659527426344315, guid: 0f27ab33d277b684297909cfa7c5e506, type: 3}
       propertyPath: loseText
       value: 
       objectReference: {fileID: 1653315877}

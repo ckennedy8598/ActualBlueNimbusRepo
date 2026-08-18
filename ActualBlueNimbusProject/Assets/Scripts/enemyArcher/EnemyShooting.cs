@@ -1,73 +1,131 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour
 {
-    /// <summary>
-    /// This is the script for the Archer enemy AI. I'll clean this up and add headers when I return, but for now
-    /// this should be good for the FFP. 
-    /// </summary>
     [Header("Animator Reference")]
-    public Animator anim;
+    [SerializeField] private Animator anim;
 
-    public GameObject Arrow;
-    public Transform ArrowPos;
+    [Header("Arrow References")]
+    [SerializeField] private GameObject Arrow;
+    [SerializeField] private Transform ArrowPos;
+
+    [Header("Shooting Settings")]
+    [SerializeField] private float shootInterval = 2f;
+    [SerializeField] private float sightRange = 4f;
+
     private GameObject player;
-
+    private Enemy enemy;
     private float timer;
-    [SerializeField] private float shootInterval = 2;
-    [SerializeField] private float sightRange = 4;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        enemy = GetComponent<Enemy>();
+
+        FindPlayer();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        Vector3 scale = transform.localScale;
-
-        if (gameObject.GetComponent<Enemy>().currentHealth <= 0)
+        // If the enemy component is missing, do nothing.
+        if (enemy == null)
         {
             return;
         }
 
-        if(player.transform.position.x > transform.position.x)
+        // If this enemy is dead, do nothing.
+        if (enemy.currentHealth <= 0)
         {
-            scale.x = Mathf.Abs(scale.x) * -1;
+            return;
         }
-        else
-        {
-            scale.x = Mathf.Abs(scale.x);
-        }
-        transform.localScale = scale;
 
-        float distance = Vector2.Distance(transform.position, player.transform.position);
+        // The original Player may have been destroyed during death/respawning.
+        // Try to find the current Player if our reference is gone.
+        if (player == null)
+        {
+            FindPlayer();
+
+            // If there still isn't a Player in the scene, wait until next frame.
+            if (player == null)
+            {
+                return;
+            }
+        }
+
+        FacePlayer();
+
+        float distance = Vector2.Distance(
+            transform.position,
+            player.transform.position
+        );
 
         if (distance < sightRange)
         {
             timer += Time.deltaTime;
 
-            if (timer > shootInterval)
+            if (timer >= shootInterval)
             {
-                timer = 0;
+                timer = 0f;
                 StartCoroutine(ShootAnim());
             }
         }
-        
+        else
+        {
+            // Optional:
+            // Prevents accumulated time from immediately firing
+            // when the player re-enters the sight range.
+            timer = 0f;
+        }
     }
-    private void shoot()
+
+    private void FindPlayer()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void FacePlayer()
+    {
+        Vector3 scale = transform.localScale;
+
+        if (player.transform.position.x > transform.position.x)
+        {
+            scale.x = -Mathf.Abs(scale.x);
+        }
+        else
+        {
+            scale.x = Mathf.Abs(scale.x);
+        }
+
+        transform.localScale = scale;
+    }
+
+    private void Shoot()
+    {
+        // Don't try to spawn an arrow if the spawn point
+        // or arrow prefab has disappeared.
+        if (Arrow == null || ArrowPos == null)
+        {
+            return;
+        }
+
         Instantiate(Arrow, ArrowPos.position, Quaternion.identity);
     }
 
     private IEnumerator ShootAnim()
     {
-        anim.SetTrigger("Attack");
-        yield return new WaitForSeconds(1.0f);
-        shoot();
+        if (anim != null)
+        {
+            anim.SetTrigger("Attack");
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        // The enemy could have died during the one-second delay.
+        if (enemy == null || enemy.currentHealth <= 0)
+        {
+            yield break;
+        }
+
+        Shoot();
     }
 }

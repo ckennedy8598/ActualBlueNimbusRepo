@@ -1,85 +1,158 @@
+/*
+ * ****************************************************************************** *
+ * Shield Enemy Script                                                            *
+ *                                                                                *
+ * Handles shield enemy health, player contact damage, death, and looking toward  *
+ * the player.                                                                    *
+ * ****************************************************************************** *
+*/
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shield_Enemy_Script : MonoBehaviour
 {
-    // Start is called before the first frame update
     [Header("Animator Reference")]
-    public Animator anim;
-
-    [Header("Rigid Body Reference")]
-    private Rigidbody2D rb;
+    [SerializeField] private Animator anim;
 
     [Header("Enemy Contact Damage")]
-    [SerializeField] public int damage = 2;
+    [SerializeField] private int damage = 2;
 
-    [Header("Player Health Variables")]
-    public PlayerCombat playerHealth;
-    public int maxHealth = 100;
-    public float currentHealth;
+    [Header("Health")]
+    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private float currentHealth;
 
-    Looking_At_Player look;
+    [Header("Soul Reward")]
+    [SerializeField] private int soulValue;
 
-    public int soulValue;
-    void Start()
+    private Rigidbody2D rb;
+    private Collider2D enemyCollider;
+    private PlayerCombat playerHealth;
+    private Looking_At_Player look;
+
+    private void Start()
     {
         currentHealth = maxHealth;
 
+        // Get components attached to this enemy.
         rb = GetComponent<Rigidbody2D>();
+        enemyCollider = GetComponent<Collider2D>();
+        look = GetComponent<Looking_At_Player>();
 
-        // Instantiate PlayerCombat script reference
+        // Find the player's PlayerCombat component.
         playerHealth = FindObjectOfType<PlayerCombat>();
+
+        if (rb == null)
+        {
+            Debug.LogError("Shield Enemy is missing a Rigidbody2D.", this);
+        }
+
+        if (enemyCollider == null)
+        {
+            Debug.LogError("Shield Enemy is missing a Collider2D.", this);
+        }
+
+        if (look == null)
+        {
+            Debug.LogError(
+                "Shield Enemy is missing the Looking_At_Player script.",
+                this
+            );
+        }
+
         if (playerHealth == null)
         {
-            Debug.LogError("PlayerCombat component not found in the scene.");
+            Debug.LogError(
+                "PlayerCombat component not found in the scene.",
+                this
+            );
+        }
+
+        // Try to automatically find the Animator if one was not assigned.
+        if (anim == null)
+        {
+            anim = GetComponent<Animator>();
+        }
+
+        if (anim == null)
+        {
+            Debug.LogError("Shield Enemy is missing an Animator.", this);
         }
     }
-    public void Update()
+
+    private void Update()
     {
-        look.LookAtPlayer();
+        if (look != null)
+        {
+            look.LookAtPlayer();
+        }
     }
 
     public void EnemyTakeDamage()
     {
-
         Die();
         StartCoroutine(DestroyBody());
-
     }
 
-     //Enemy to player collision damage
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Collision Damage");
-            playerHealth.TakeDamage(damage);
+
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damage);
+            }
         }
-        if (collision.gameObject.tag == "FireBall")
+
+        if (collision.gameObject.CompareTag("FireBall"))
         {
             Die();
             StartCoroutine(DestroyBody());
         }
     }
 
-    public void Die()
+    private void Die()
     {
-        anim.SetTrigger("isDead");
+        if (anim != null)
+        {
+            anim.SetTrigger("isDead");
+        }
 
-        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-        // Freeze X and Y position of object rigidbody
-        rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-        rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-        gameObject.GetComponent<Collider2D>().enabled = false;
-        // Disables Enemy Script
-        this.enabled = false;
+        if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+
+            // Freeze both X and Y movement.
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        }
+
+        if (enemyCollider != null)
+        {
+            enemyCollider.enabled = false;
+        }
+
+        // Disable this script so the enemy stops running Update().
+        enabled = false;
     }
 
     private IEnumerator DestroyBody()
     {
         yield return new WaitForSeconds(1.7f);
+
+        if (Collectibles_Soul_Counter.instance != null)
+        {
+            Collectibles_Soul_Counter.instance.IncreaseSouls(soulValue);
+        }
+        else
+        {
+            Debug.LogError(
+                "Collectibles_Soul_Counter instance could not be found.",
+                this
+            );
+        }
+
         Destroy(gameObject);
-        Collectibles_Soul_Counter.instance.IncreaseSouls(soulValue);
     }
 }
